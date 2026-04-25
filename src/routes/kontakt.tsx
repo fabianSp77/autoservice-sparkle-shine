@@ -167,6 +167,7 @@ function ContactPage() {
         title="Am schnellsten erreichen Sie uns telefonisch."
         subtitle="Persönlich Mo–Fr von 8 bis 17 Uhr — außerhalb der Öffnungszeiten nimmt unser Telefonassistent rund um die Uhr Ihre Anliegen entgegen."
         breadcrumbs={[{ label: "Kontakt" }]}
+        showTrustStrip={false}
       />
 
       {/* PHONE-FIRST CTA */}
@@ -423,13 +424,8 @@ function ContactPage() {
                   )}
                 </Button>
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Für konkrete Terminanfragen erreichen Sie uns am schnellsten
-                  unter{" "}
-                  <a href={`tel:${SITE.phoneIntl}`} className="text-primary font-medium hover:underline">
-                    {SITE.phone}
-                  </a>{" "}
-                  — <strong className="text-foreground/80">24/7</strong> über
-                  unseren Telefonassistenten.
+                  Wir antworten innerhalb eines Werktages. Für konkrete
+                  Termine ist ein kurzer Anruf am schnellsten.
                 </p>
               </form>
             )}
@@ -437,16 +433,12 @@ function ContactPage() {
 
           {/* SIDEBAR */}
           <aside className="space-y-4">
-            <ContactCard icon={PhoneCall} title="Telefon — 24/7 erreichbar" body={
-              <>
-                <a href={`tel:${SITE.phoneIntl}`} className="text-primary hover:underline font-semibold text-base">
-                  {SITE.phone}
-                </a>
-                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                  Persönlich Mo–Fr 8–17 Uhr · Außerhalb der Zeiten nimmt unser
-                  Telefonassistent rund um die Uhr Ihre Anliegen entgegen.
-                </p>
-              </>
+            <ContactCard icon={PhoneCall} title="Telefonisch erreichbar" body={
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                <span className="text-foreground font-medium">Mo–Fr 8–17 Uhr</span>{" "}
+                persönlich · außerhalb übernimmt unser Telefonassistent
+                rund um die Uhr.
+              </p>
             } />
             <ContactCard icon={Mail} title="E-Mail" body={
               <a href={`mailto:${SITE.email}`} className="text-primary hover:underline break-all">{SITE.email}</a>
