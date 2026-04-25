@@ -28,15 +28,12 @@ export const SITE = {
   registerNumber: "HRB 177787",
   mapsEmbed:
     "https://www.google.com/maps?q=Autoservice+Beuerberg+GmbH,+Bahnhofstra%C3%9Fe+45,+82547+Eurasburg&output=embed",
-  // Standardisierte Google-Maps-Suche nach Name + Adresse — landet zuverlässig
-  // auf dem Brancheneintrag mit Bewertungs-Tab, ohne auf eine geratene
-  // Place-ID angewiesen zu sein.
+  // Verifizierter Google-Maps-Eintrag (Hex Place-ID 0x479db8a7ae26a865:0x24f5af4b0ba698e7).
   mapsLink:
-    "https://www.google.com/maps/search/?api=1&query=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg",
-  // "Bewertung schreiben" — Google-Suche nach dem Eintrag; der "Rezension
-  // schreiben"-Button erscheint direkt im Knowledge-Panel rechts.
+    "https://www.google.com/maps/place/Autoservice+Beuerberg+GmbH/@47.8285903,11.4047145,17z/data=!3m1!4b1!4m6!3m5!1s0x479db8a7ae26a865:0x24f5af4b0ba698e7!8m2!3d47.8285867!4d11.4072894!16s%2Fg%2F1tj99_1y",
+  // "Bewertung schreiben" — direkter Deeplink über die echte CID (dezimal von 0x24f5af4b0ba698e7).
   googleReviewLink:
-    "https://www.google.com/search?q=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg",
+    "https://search.google.com/local/writereview?placeid=ChIJZahmrqe4nUcR54emC0uv9SQ&ludocid=2663517445934358759",
   facebookUrl: "https://www.facebook.com/AutoserviceBeuerberg/",
   facebookHandle: "AutoserviceBeuerberg",
 } as const;
