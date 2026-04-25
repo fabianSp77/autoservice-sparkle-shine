@@ -9,6 +9,8 @@ type Props = {
 
 export function FacebookFeed({ height = 500, width = 500 }: Props) {
   const consent = useEmbedConsent();
+  // Facebook plugin caps width at 500. We render the iframe centered and let the
+  // surrounding card span full width — looks balanced on desktop and mobile.
   const pluginUrl = `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
     SITE.facebookUrl,
   )}&tabs=timeline&width=${width}&height=${height}&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&locale=de_DE`;
@@ -37,16 +39,18 @@ export function FacebookFeed({ height = 500, width = 500 }: Props) {
         </a>
       </div>
       {consent ? (
-        <iframe
-          title="Autoservice Beuerberg auf Facebook"
-          src={pluginUrl}
-          width="100%"
-          height={height}
-          style={{ border: "none", overflow: "hidden", display: "block" }}
-          scrolling="no"
-          loading="lazy"
-          allow="encrypted-media"
-        />
+        <div className="bg-cream/30 flex justify-center">
+          <iframe
+            title="Autoservice Beuerberg auf Facebook"
+            src={pluginUrl}
+            width={width}
+            height={height}
+            style={{ border: "none", overflow: "hidden", display: "block", maxWidth: "100%" }}
+            scrolling="no"
+            loading="lazy"
+            allow="encrypted-media"
+          />
+        </div>
       ) : (
         <div
           className="flex flex-col items-center justify-center text-center px-6 py-10 bg-cream/30"
