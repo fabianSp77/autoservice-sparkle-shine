@@ -19,6 +19,8 @@ import {
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "@/components/PageHero";
 import { MapEmbed } from "@/components/MapEmbed";
+import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
+import { GOOGLE_REVIEWS, REVIEWS_SUMMARY } from "@/lib/reviews";
 import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/foto-02.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
@@ -90,23 +92,10 @@ const TRUST = [
   { icon: ShieldCheck, label: "Faire, transparente Preise" },
 ];
 
-const REVIEWS = [
-  {
-    name: "Andrea L.",
-    role: "Münsing",
-    text: "Schnelle Termine, ehrliche Kommunikation und immer ein freundliches Wort. Wir sind seit Jahren Kunde — uneingeschränkt zu empfehlen.",
-  },
-  {
-    name: "Matthias R.",
-    role: "Wolfratshausen",
-    text: "Super Werkstatt, sehr kompetent und fair im Preis. Familie Fischer und das Team kümmern sich wirklich um jeden Wagen.",
-  },
-  {
-    name: "Stefanie B.",
-    role: "Beuerberg",
-    text: "Endlich eine Werkstatt, der man vertrauen kann. Reifeneinlagerung, Inspektion, HU — alles aus einer Hand und immer top.",
-  },
-];
+// Echte Google-Reviews — wir picken 3 prägnante Kurz-Bewertungen für die Startseite
+const HOME_REVIEWS = GOOGLE_REVIEWS.filter((r) =>
+  ["Mia Oeckl", "Auto Linner", "Andreas M.", "Josef Fichtner"].includes(r.author),
+).slice(0, 3);
 
 function HomePage() {
   return (
