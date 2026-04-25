@@ -19,6 +19,8 @@ import {
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "@/components/PageHero";
 import { MapEmbed } from "@/components/MapEmbed";
+import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
+import { GOOGLE_REVIEWS, REVIEWS_SUMMARY } from "@/lib/reviews";
 import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/foto-02.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
@@ -90,23 +92,10 @@ const TRUST = [
   { icon: ShieldCheck, label: "Faire, transparente Preise" },
 ];
 
-const REVIEWS = [
-  {
-    name: "Andrea L.",
-    role: "Münsing",
-    text: "Schnelle Termine, ehrliche Kommunikation und immer ein freundliches Wort. Wir sind seit Jahren Kunde — uneingeschränkt zu empfehlen.",
-  },
-  {
-    name: "Matthias R.",
-    role: "Wolfratshausen",
-    text: "Super Werkstatt, sehr kompetent und fair im Preis. Familie Fischer und das Team kümmern sich wirklich um jeden Wagen.",
-  },
-  {
-    name: "Stefanie B.",
-    role: "Beuerberg",
-    text: "Endlich eine Werkstatt, der man vertrauen kann. Reifeneinlagerung, Inspektion, HU — alles aus einer Hand und immer top.",
-  },
-];
+// Echte Google-Reviews — wir picken 3 prägnante Kurz-Bewertungen für die Startseite
+const HOME_REVIEWS = GOOGLE_REVIEWS.filter((r) =>
+  ["Mia Oeckl", "Auto Linner", "Andreas M.", "Josef Fichtner"].includes(r.author),
+).slice(0, 3);
 
 function HomePage() {
   return (
@@ -167,6 +156,12 @@ function HomePage() {
               <Phone className="h-4 w-4" />
               {SITE.phone}
             </a>
+          </div>
+          <div
+            className="mt-6 flex items-center gap-3 fade-in-up"
+            style={{ animationDelay: "260ms" }}
+          >
+            <GoogleRatingBadge variant="dark" />
           </div>
         </div>
       </section>
@@ -337,29 +332,35 @@ function HomePage() {
         <div className="container-tight relative">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-xs uppercase tracking-[0.22em] text-gold font-medium">
-              Was unsere Kunden sagen
+              Echte Google-Bewertungen
             </p>
             <h2 className="mt-3 font-serif text-3xl sm:text-4xl md:text-5xl text-balance">
               Vertrauen, das man hört.
             </h2>
+            <div className="mt-6 flex justify-center">
+              <GoogleRatingBadge variant="dark" />
+            </div>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {REVIEWS.map((r) => (
+            {HOME_REVIEWS.map((r) => (
               <figure
-                key={r.name}
-                className="rounded-2xl bg-background/5 border border-background/10 p-7 backdrop-blur"
+                key={r.author}
+                className="rounded-2xl bg-background/5 border border-background/10 p-7 backdrop-blur flex flex-col"
               >
                 <div className="flex gap-0.5 text-gold">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-gold" />
+                    <Star
+                      key={i}
+                      className={i < r.rating ? "h-4 w-4 fill-gold" : "h-4 w-4 opacity-30"}
+                    />
                   ))}
                 </div>
-                <blockquote className="mt-4 text-background/90 leading-relaxed">
+                <blockquote className="mt-4 text-background/90 leading-relaxed flex-1">
                   „{r.text}"
                 </blockquote>
                 <figcaption className="mt-5 text-sm">
-                  <span className="font-medium text-background">{r.name}</span>
-                  <span className="text-background/60"> · {r.role}</span>
+                  <span className="font-medium text-background">{r.author}</span>
+                  <span className="text-background/60"> · {r.date}</span>
                 </figcaption>
               </figure>
             ))}
@@ -369,7 +370,7 @@ function HomePage() {
               to="/bewertungen"
               className="inline-flex items-center gap-2 text-sm font-semibold text-gold hover:gap-3 transition-all"
             >
-              Alle Bewertungen lesen <ArrowRight className="h-4 w-4" />
+              Alle {REVIEWS_SUMMARY.count}+ Bewertungen lesen <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

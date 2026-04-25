@@ -3,6 +3,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Phone, Menu, X } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { GoogleRatingBadge } from "./GoogleRatingBadge";
 
 const NAV = [
   { to: "/", label: "Start" },
@@ -74,7 +75,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 md:gap-3">
+          <GoogleRatingBadge variant="compact" className="hidden md:inline-flex" />
           <a
             href={`tel:${SITE.phoneIntl}`}
             className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary-hover transition-colors shadow-warm"
