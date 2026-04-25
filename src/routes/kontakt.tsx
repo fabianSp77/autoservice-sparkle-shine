@@ -1,11 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { format } from "date-fns";
-import { de } from "date-fns/locale";
 import {
-  CalendarIcon, Phone, Mail, MapPin, Clock, Loader2, Send, CheckCircle2,
-  PhoneCall, Plus, X,
+  Phone, Mail, MapPin, Clock, Loader2, Send, CheckCircle2,
+  PhoneCall, Headphones, Users,
 } from "lucide-react";
 import { toast } from "sonner";
 import { PageHero } from "@/components/PageHero";
@@ -14,13 +12,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-  Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
-} from "@/components/ui/select";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { MapEmbed } from "@/components/MapEmbed";
+
+const REQUEST_TYPES = [
+  {
+    id: "general",
+    label: "Allgemeine Anfrage",
+    desc: "Frage zum Service, Beratung oder Information",
+  },
+  {
+    id: "services",
+    label: "Anfrage zu Leistungen",
+    desc: "Konkrete Leistungen anfragen oder Kostenvoranschlag",
+  },
+] as const;
+
+type RequestType = (typeof REQUEST_TYPES)[number]["id"];
 
 const SERVICE_OPTIONS = [
   "Inspektion / Wartung",
@@ -34,45 +42,39 @@ const SERVICE_OPTIONS = [
   "Sonstiges",
 ] as const;
 
-const TIME_OPTIONS = [
-  "08:00 – 10:00",
-  "10:00 – 12:00",
-  "12:00 – 14:00",
-  "14:00 – 17:00",
-  "Egal — bitte vorschlagen",
-] as const;
-
-type Slot = { date?: Date; time: string };
-
-const slotSchema = z.object({
-  date: z.date().optional(),
-  time: z.string().optional(),
-});
-
-const schema = z.object({
-  name: z.string().trim().min(2, "Bitte Name angeben").max(100),
-  phone: z.string().trim().min(5, "Bitte Telefonnummer angeben").max(40),
-  email: z.string().trim().email("Gültige E-Mail-Adresse angeben").max(180),
-  vehicle: z.string().trim().min(2, "Bitte Fahrzeug angeben").max(120),
-  services: z.array(z.string()).min(1, "Bitte mindestens eine Leistung wählen").max(9),
-  slots: z.array(slotSchema).min(1).max(3),
-  message: z.string().trim().max(1500).optional(),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: "Bitte Datenschutz bestätigen" }),
-  }),
-});
+const schema = z
+  .object({
+    requestType: z.enum(["general", "services"]),
+    name: z.string().trim().min(2, "Bitte Name angeben").max(100),
+    phone: z.string().trim().max(40).optional().or(z.literal("")),
+    email: z.string().trim().email("Gültige E-Mail-Adresse angeben").max(180),
+    vehicle: z.string().trim().max(120).optional().or(z.literal("")),
+    services: z.array(z.string()).max(9),
+    message: z.string().trim().min(5, "Bitte beschreiben Sie kurz Ihr Anliegen").max(1500),
+    consent: z.literal(true, {
+      errorMap: () => ({ message: "Bitte Datenschutz bestätigen" }),
+    }),
+  })
+  .refine(
+    (d) => d.requestType !== "services" || d.services.length > 0,
+    { path: ["services"], message: "Bitte mindestens eine Leistung wählen" },
+  );
 
 type FormState = {
-  name: string; phone: string; email: string; vehicle: string;
+  requestType: RequestType;
+  name: string;
+  phone: string;
+  email: string;
+  vehicle: string;
   services: string[];
-  slots: Slot[];
-  message: string; consent: boolean;
+  message: string;
+  consent: boolean;
 };
 
 const INITIAL: FormState = {
+  requestType: "general",
   name: "", phone: "", email: "", vehicle: "",
   services: [],
-  slots: [{ date: undefined, time: "" }],
   message: "", consent: false,
 };
 
@@ -82,16 +84,16 @@ export const Route = createFileRoute("/kontakt")({
   }),
   head: () => ({
     meta: [
-      { title: "Kontakt & Termin online buchen — Autoservice Beuerberg" },
+      { title: "Kontakt — Autoservice Beuerberg | 24/7 telefonisch erreichbar" },
       {
         name: "description",
         content:
-          "Termin online buchen oder rund um die Uhr telefonisch: 08179 929244. Autoservice Beuerberg GmbH, Bahnhofstraße 45, 82547 Eurasburg-Beuerberg.",
+          "Telefonisch rund um die Uhr erreichbar: 08179 929244. Persönlich Mo–Fr 8–17 Uhr, außerhalb über unseren Telefonassistenten. Oder schreiben Sie uns eine Nachricht.",
       },
-      { property: "og:title", content: "Kontakt & Termin online buchen — Autoservice Beuerberg" },
+      { property: "og:title", content: "Kontakt — Autoservice Beuerberg" },
       {
         property: "og:description",
-        content: "Termin direkt online buchen oder telefonisch — 24/7 erreichbar über unseren Telefonassistenten.",
+        content: "Telefonisch rund um die Uhr — persönlich oder über unseren Telefonassistenten.",
       },
     ],
   }),
@@ -102,8 +104,13 @@ function ContactPage() {
   const search = Route.useSearch();
   const presetService =
     search.leistung === "reifenservice" ? ["Reifenwechsel / Reifenservice"] : [];
+  const presetType: RequestType = presetService.length > 0 ? "services" : "general";
 
-  const [form, setForm] = useState<FormState>({ ...INITIAL, services: presetService });
+  const [form, setForm] = useState<FormState>({
+    ...INITIAL,
+    requestType: presetType,
+    services: presetService,
+  });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -123,25 +130,6 @@ function ContactPage() {
     setErrors((p) => ({ ...p, services: "" }));
   };
 
-  const updateSlot = (i: number, patch: Partial<Slot>) => {
-    setForm((p) => ({
-      ...p,
-      slots: p.slots.map((s, idx) => (idx === i ? { ...s, ...patch } : s)),
-    }));
-  };
-
-  const addSlot = () => {
-    if (form.slots.length >= 3) return;
-    setForm((p) => ({ ...p, slots: [...p.slots, { date: undefined, time: "" }] }));
-  };
-
-  const removeSlot = (i: number) => {
-    setForm((p) => ({
-      ...p,
-      slots: p.slots.length === 1 ? p.slots : p.slots.filter((_, idx) => idx !== i),
-    }));
-  };
-
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = schema.safeParse(form);
@@ -159,17 +147,11 @@ function ContactPage() {
       const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...parsed.data,
-          slots: parsed.data.slots.map((s) => ({
-            date: s.date ? s.date.toISOString() : null,
-            time: s.time || null,
-          })),
-        }),
+        body: JSON.stringify(parsed.data),
       });
       if (!res.ok) throw new Error("Anfrage fehlgeschlagen");
       setSubmitted(true);
-      toast.success("Anfrage gesendet — wir melden uns!");
+      toast.success("Nachricht gesendet — wir melden uns!");
       setForm({ ...INITIAL });
     } catch {
       toast.error("Es ist etwas schiefgelaufen. Bitte rufen Sie uns kurz an.");
@@ -181,39 +163,61 @@ function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Kontakt & Termin"
-        title="Termin online — oder rund um die Uhr per Telefon."
-        subtitle="Tragen Sie bis zu drei Wunschtermine ein und wählen Sie alle gewünschten Leistungen aus. Wir bestätigen innerhalb eines Werktages."
-        breadcrumbs={[{ label: "Kontakt & Termin" }]}
+        eyebrow="Kontakt"
+        title="Am schnellsten erreichen Sie uns telefonisch."
+        subtitle="Persönlich Mo–Fr von 8 bis 17 Uhr — außerhalb der Öffnungszeiten nimmt unser Telefonassistent rund um die Uhr Ihre Anliegen entgegen."
+        breadcrumbs={[{ label: "Kontakt" }]}
       />
 
-      <section className="pb-20">
+      {/* PHONE-FIRST CTA */}
+      <section className="py-10 md:py-12 bg-cream/40 border-b border-border">
+        <div className="container-tight">
+          <div className="rounded-3xl bg-card border border-border shadow-warm p-6 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 md:gap-10 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold mb-3">
+                <Headphones className="h-3.5 w-3.5" />
+                Empfohlen — am schnellsten
+              </div>
+              <h2 className="font-serif text-2xl md:text-3xl">
+                Lieber telefonisch?
+              </h2>
+              <p className="mt-2 text-muted-foreground max-w-xl">
+                Rufen Sie uns einfach an — innerhalb der Öffnungszeiten meldet sich
+                persönlich unser Team. Außerhalb (abends, am Wochenende, an Feiertagen)
+                nimmt unser <strong className="text-foreground">Telefonassistent rund um die Uhr</strong> Ihre
+                Terminwünsche und Anliegen entgegen.
+              </p>
+              <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
+                <li className="flex items-center gap-2 text-foreground/80">
+                  <Users className="h-4 w-4 text-primary shrink-0" />
+                  Mo–Fr 8–17 Uhr persönlich
+                </li>
+                <li className="flex items-center gap-2 text-foreground/80">
+                  <Headphones className="h-4 w-4 text-primary shrink-0" />
+                  24/7 Telefonassistent
+                </li>
+              </ul>
+            </div>
+            <a
+              href={`tel:${SITE.phoneIntl}`}
+              className="inline-flex flex-col items-center justify-center gap-1 rounded-2xl bg-primary text-primary-foreground px-8 py-6 hover:bg-primary-hover transition-colors shadow-warm w-full md:w-auto"
+            >
+              <Phone className="h-6 w-6" />
+              <span className="font-serif text-2xl md:text-3xl tracking-tight">
+                {SITE.phone}
+              </span>
+              <span className="text-xs uppercase tracking-wider opacity-90">
+                Jetzt anrufen
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-20">
         <div className="container-tight grid lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-14">
           {/* FORM */}
           <div>
-            {/* 24/7 Telefonassistent Hinweis */}
-            <div className="mb-6 rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:p-6 flex flex-col sm:flex-row items-start gap-4">
-              <span className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-primary text-primary-foreground shrink-0 shadow-warm">
-                <PhoneCall className="h-5 w-5" />
-              </span>
-              <div className="flex-1">
-                <p className="font-serif text-lg text-foreground">
-                  Lieber direkt anrufen? Wir sind <span className="text-primary">rund um die Uhr</span> erreichbar.
-                </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Unser Telefonassistent nimmt Ihre Terminwünsche 24/7 entgegen — auch
-                  abends, am Wochenende und an Feiertagen. Innerhalb der Öffnungszeiten
-                  erreichen Sie persönlich unser Team.
-                </p>
-                <a
-                  href={`tel:${SITE.phoneIntl}`}
-                  className="mt-3 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold hover:bg-primary-hover transition-colors shadow-warm"
-                >
-                  <Phone className="h-4 w-4" /> {SITE.phone}
-                </a>
-              </div>
-            </div>
-
             {submitted ? (
               <div className="rounded-3xl bg-card border border-border p-10 text-center shadow-warm">
                 <span className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary/10 text-primary">
@@ -221,15 +225,15 @@ function ContactPage() {
                 </span>
                 <h2 className="mt-5 font-serif text-2xl">Vielen Dank!</h2>
                 <p className="mt-3 text-muted-foreground max-w-md mx-auto">
-                  Ihre Anfrage ist bei uns eingegangen. Wir melden uns
-                  innerhalb eines Werktages zur Terminbestätigung.
+                  Ihre Nachricht ist bei uns eingegangen. Wir melden uns
+                  innerhalb eines Werktages.
                 </p>
                 <Button
                   variant="outline"
                   className="mt-6"
                   onClick={() => setSubmitted(false)}
                 >
-                  Neue Anfrage stellen
+                  Neue Nachricht schreiben
                 </Button>
               </div>
             ) : (
@@ -238,11 +242,50 @@ function ContactPage() {
                 noValidate
                 className="rounded-3xl bg-card border border-border p-6 sm:p-8 shadow-soft"
               >
-                <h2 className="font-serif text-2xl">Termin anfragen</h2>
+                <h2 className="font-serif text-2xl">Schreiben Sie uns</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Pflichtfelder sind mit * markiert.
+                  Für konkrete Termine empfehlen wir den Anruf — schriftliche
+                  Anfragen beantworten wir innerhalb eines Werktages.
                 </p>
 
+                {/* Anfragetyp */}
+                <fieldset className="mt-6">
+                  <legend className="text-sm font-medium">
+                    Worum geht es? *
+                  </legend>
+                  <div className="mt-3 grid sm:grid-cols-2 gap-3">
+                    {REQUEST_TYPES.map((t) => {
+                      const checked = form.requestType === t.id;
+                      return (
+                        <label
+                          key={t.id}
+                          className={cn(
+                            "flex flex-col gap-1 rounded-xl border px-4 py-3 cursor-pointer transition-colors text-sm",
+                            checked
+                              ? "border-primary bg-primary/5"
+                              : "border-border bg-background hover:border-primary/40",
+                          )}
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <input
+                              type="radio"
+                              name="requestType"
+                              checked={checked}
+                              onChange={() => set("requestType", t.id)}
+                              className="h-4 w-4 border-border accent-primary"
+                            />
+                            <span className="font-semibold">{t.label}</span>
+                          </div>
+                          <span className="text-xs text-muted-foreground pl-6.5">
+                            {t.desc}
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+
+                {/* Persönliche Daten */}
                 <div className="mt-6 grid sm:grid-cols-2 gap-4">
                   <Field label="Name *" error={errors.name} id="name">
                     <Input
@@ -253,7 +296,7 @@ function ContactPage() {
                       autoComplete="name"
                     />
                   </Field>
-                  <Field label="Telefon *" error={errors.phone} id="phone">
+                  <Field label="Telefon (optional)" error={errors.phone} id="phone">
                     <Input
                       id="phone"
                       value={form.phone}
@@ -273,7 +316,12 @@ function ContactPage() {
                       autoComplete="email"
                     />
                   </Field>
-                  <Field label="Fahrzeug (Marke, Modell, Bj.) *" error={errors.vehicle} id="vehicle" className="sm:col-span-2">
+                  <Field
+                    label={form.requestType === "services" ? "Fahrzeug (Marke, Modell, Bj.)" : "Fahrzeug (optional)"}
+                    error={errors.vehicle}
+                    id="vehicle"
+                    className="sm:col-span-2"
+                  >
                     <Input
                       id="vehicle"
                       value={form.vehicle}
@@ -283,135 +331,58 @@ function ContactPage() {
                   </Field>
                 </div>
 
-                {/* Multi-Leistungen */}
-                <fieldset className="mt-6">
-                  <legend className="text-sm font-medium">
-                    Gewünschte Leistungen * <span className="text-muted-foreground font-normal">(Mehrfachauswahl möglich)</span>
-                  </legend>
-                  <div className="mt-3 grid sm:grid-cols-2 gap-2">
-                    {SERVICE_OPTIONS.map((s) => {
-                      const checked = form.services.includes(s);
-                      return (
-                        <label
-                          key={s}
-                          className={cn(
-                            "flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-colors text-sm",
-                            checked
-                              ? "border-primary bg-primary/5 text-foreground"
-                              : "border-border bg-background hover:border-primary/40",
-                          )}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={() => toggleService(s)}
-                            className="h-4 w-4 rounded border-border accent-primary"
-                          />
-                          <span className="font-medium">{s}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                  {errors.services && (
-                    <p className="mt-2 text-xs text-destructive">{errors.services}</p>
-                  )}
-                </fieldset>
-
-                {/* Multi-Wunschtermine */}
-                <fieldset className="mt-6">
-                  <legend className="text-sm font-medium">
-                    Wunschtermine <span className="text-muted-foreground font-normal">(bis zu 3 Vorschläge möglich)</span>
-                  </legend>
-                  <div className="mt-3 space-y-3">
-                    {form.slots.map((slot, i) => (
-                      <div
-                        key={i}
-                        className="rounded-xl border border-border bg-background p-3 sm:p-4"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                            Wunsch {i + 1}
-                          </span>
-                          {form.slots.length > 1 && (
-                            <button
-                              type="button"
-                              onClick={() => removeSlot(i)}
-                              className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive transition-colors"
-                              aria-label={`Wunschtermin ${i + 1} entfernen`}
-                            >
-                              <X className="h-3.5 w-3.5" /> entfernen
-                            </button>
-                          )}
-                        </div>
-                        <div className="grid sm:grid-cols-2 gap-3">
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <Button
-                                type="button"
-                                variant="outline"
-                                className={cn(
-                                  "w-full justify-start text-left font-normal",
-                                  !slot.date && "text-muted-foreground",
-                                )}
-                              >
-                                <CalendarIcon className="mr-2 h-4 w-4" />
-                                {slot.date
-                                  ? format(slot.date, "PPP", { locale: de })
-                                  : "Datum wählen"}
-                              </Button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
-                              <Calendar
-                                mode="single"
-                                selected={slot.date}
-                                onSelect={(d) => updateSlot(i, { date: d })}
-                                locale={de}
-                                weekStartsOn={1}
-                                disabled={(d) => {
-                                  const today = new Date();
-                                  today.setHours(0, 0, 0, 0);
-                                  return d < today || d.getDay() === 0;
-                                }}
-                                className={cn("p-3 pointer-events-auto")}
-                              />
-                            </PopoverContent>
-                          </Popover>
-                          <Select
-                            value={slot.time}
-                            onValueChange={(v) => updateSlot(i, { time: v })}
+                {/* Leistungen — nur bei "services" */}
+                {form.requestType === "services" && (
+                  <fieldset className="mt-6">
+                    <legend className="text-sm font-medium">
+                      Gewünschte Leistungen *{" "}
+                      <span className="text-muted-foreground font-normal">
+                        (Mehrfachauswahl möglich)
+                      </span>
+                    </legend>
+                    <div className="mt-3 grid sm:grid-cols-2 gap-2">
+                      {SERVICE_OPTIONS.map((s) => {
+                        const checked = form.services.includes(s);
+                        return (
+                          <label
+                            key={s}
+                            className={cn(
+                              "flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-colors text-sm",
+                              checked
+                                ? "border-primary bg-primary/5 text-foreground"
+                                : "border-border bg-background hover:border-primary/40",
+                            )}
                           >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Zeit wählen" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {TIME_OPTIONS.map((t) => (
-                                <SelectItem key={t} value={t}>{t}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  {form.slots.length < 3 && (
-                    <button
-                      type="button"
-                      onClick={addSlot}
-                      className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
-                    >
-                      <Plus className="h-4 w-4" /> Weiteren Wunschtermin hinzufügen
-                    </button>
-                  )}
-                </fieldset>
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={() => toggleService(s)}
+                              className="h-4 w-4 rounded border-border accent-primary"
+                            />
+                            <span className="font-medium">{s}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                    {errors.services && (
+                      <p className="mt-2 text-xs text-destructive">{errors.services}</p>
+                    )}
+                  </fieldset>
+                )}
 
+                {/* Nachricht */}
                 <div className="mt-6">
-                  <Field label="Nachricht (optional)" error={errors.message} id="message">
+                  <Field label="Ihre Nachricht *" error={errors.message} id="message">
                     <Textarea
                       id="message"
                       value={form.message}
                       onChange={(e) => set("message", e.target.value)}
-                      placeholder="Beschreiben Sie kurz Ihr Anliegen…"
-                      rows={4}
+                      placeholder={
+                        form.requestType === "services"
+                          ? "Beschreiben Sie kurz, was an Ihrem Fahrzeug gemacht werden soll…"
+                          : "Worum geht es? Stellen Sie hier gerne Ihre Frage…"
+                      }
+                      rows={5}
                       maxLength={1500}
                     />
                   </Field>
@@ -447,16 +418,18 @@ function ContactPage() {
                   ) : (
                     <>
                       <Send className="h-4 w-4" />
-                      Anfrage senden
+                      Nachricht senden
                     </>
                   )}
                 </Button>
                 <p className="mt-3 text-xs text-muted-foreground">
-                  Lieber telefonisch?{" "}
+                  Für konkrete Terminanfragen erreichen Sie uns am schnellsten
+                  unter{" "}
                   <a href={`tel:${SITE.phoneIntl}`} className="text-primary font-medium hover:underline">
                     {SITE.phone}
                   </a>{" "}
-                  — unser Telefonassistent ist <strong className="text-foreground/80">24/7</strong> für Sie da.
+                  — <strong className="text-foreground/80">24/7</strong> über
+                  unseren Telefonassistenten.
                 </p>
               </form>
             )}
@@ -464,11 +437,14 @@ function ContactPage() {
 
           {/* SIDEBAR */}
           <aside className="space-y-4">
-            <ContactCard icon={PhoneCall} title="Telefon — 24/7" body={
+            <ContactCard icon={PhoneCall} title="Telefon — 24/7 erreichbar" body={
               <>
-                <a href={`tel:${SITE.phoneIntl}`} className="text-primary hover:underline font-medium">{SITE.phone}</a>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Telefonassistent rund um die Uhr · Persönlich Mo–Fr 8–17 Uhr
+                <a href={`tel:${SITE.phoneIntl}`} className="text-primary hover:underline font-semibold text-base">
+                  {SITE.phone}
+                </a>
+                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                  Persönlich Mo–Fr 8–17 Uhr · Außerhalb der Zeiten nimmt unser
+                  Telefonassistent rund um die Uhr Ihre Anliegen entgegen.
                 </p>
               </>
             } />
