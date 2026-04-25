@@ -316,7 +316,7 @@ function CtaSection() {
                 to="/kontakt"
                 className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-6 py-3 text-sm font-semibold hover:bg-primary-foreground/10 transition-colors"
               >
-                Termin anfragen
+                Kontakt aufnehmen
               </Link>
             </div>
           </div>

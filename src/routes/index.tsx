@@ -487,25 +487,25 @@ function HomePage() {
         />
         <div className="container-tight relative text-center text-primary-foreground">
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-balance max-w-2xl mx-auto">
-            Bereit für einen Termin? Wir kümmern uns um den Rest.
+            Bereit für Ihren Termin? Ein Anruf genügt.
           </h2>
           <p className="mt-4 text-primary-foreground/85 max-w-xl mx-auto">
-            Buchen Sie online oder rufen Sie uns einfach an — wir finden
-            gemeinsam den passenden Termin.
+            Persönlich Mo–Fr 8–17 Uhr — außerhalb nimmt unser Telefonassistent
+            <strong className="text-primary-foreground"> rund um die Uhr</strong> Ihre Terminwünsche entgegen.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-background text-foreground px-6 py-3.5 text-sm font-semibold hover:bg-background/90 transition-colors shadow-warm"
-            >
-              <CalendarCheck className="h-4 w-4" /> Termin online buchen
-            </Link>
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-background/40 bg-background/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background text-foreground px-6 py-3.5 text-sm font-semibold hover:bg-background/90 transition-colors shadow-warm"
             >
               <Phone className="h-4 w-4" /> {SITE.phone}
             </a>
+            <Link
+              to="/kontakt"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-background/40 bg-background/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+            >
+              Schriftlich kontaktieren
+            </Link>
           </div>
         </div>
       </section>
