@@ -18,10 +18,15 @@ import {
 } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "@/components/PageHero";
-import heroImg from "@/assets/hero-werkstatt.jpg";
-import teamImg from "@/assets/team-fischer.jpg";
-import reifenImg from "@/assets/reifenservice.jpg";
-import landschaftImg from "@/assets/beuerberg-landschaft.jpg";
+import { MapEmbed } from "@/components/MapEmbed";
+import heroImg from "@/assets/real/foto-01.jpg";
+import teamImg from "@/assets/real/foto-02.jpg";
+import reifenImg from "@/assets/real/foto-05.jpg";
+import detailImg from "@/assets/real/foto-04.jpg";
+import gallery1 from "@/assets/real/foto-03.jpg";
+import gallery2 from "@/assets/real/foto-06.jpg";
+import gallery3 from "@/assets/real/foto-07.jpg";
+import gallery4 from "@/assets/real/foto-08.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
