@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as ReifenserviceRouteImport } from './routes/reifenservice'
 import { Route as LeistungenRouteImport } from './routes/leistungen'
+import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as BewertungenRouteImport } from './routes/bewertungen'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -30,6 +31,11 @@ const LeistungenRoute = LeistungenRouteImport.update({
   path: '/leistungen',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BewertungenRoute = BewertungenRouteImport.update({
   id: '/bewertungen',
   path: '/bewertungen',
@@ -44,6 +50,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bewertungen': typeof BewertungenRoute
+  '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
   '/reifenservice': typeof ReifenserviceRoute
   '/ueber-uns': typeof UeberUnsRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bewertungen': typeof BewertungenRoute
+  '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
   '/reifenservice': typeof ReifenserviceRoute
   '/ueber-uns': typeof UeberUnsRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bewertungen': typeof BewertungenRoute
+  '/kontakt': typeof KontaktRoute
   '/leistungen': typeof LeistungenRoute
   '/reifenservice': typeof ReifenserviceRoute
   '/ueber-uns': typeof UeberUnsRoute
@@ -68,15 +77,23 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/bewertungen'
+    | '/kontakt'
     | '/leistungen'
     | '/reifenservice'
     | '/ueber-uns'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bewertungen' | '/leistungen' | '/reifenservice' | '/ueber-uns'
+  to:
+    | '/'
+    | '/bewertungen'
+    | '/kontakt'
+    | '/leistungen'
+    | '/reifenservice'
+    | '/ueber-uns'
   id:
     | '__root__'
     | '/'
     | '/bewertungen'
+    | '/kontakt'
     | '/leistungen'
     | '/reifenservice'
     | '/ueber-uns'
@@ -85,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BewertungenRoute: typeof BewertungenRoute
+  KontaktRoute: typeof KontaktRoute
   LeistungenRoute: typeof LeistungenRoute
   ReifenserviceRoute: typeof ReifenserviceRoute
   UeberUnsRoute: typeof UeberUnsRoute
@@ -113,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeistungenRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bewertungen': {
       id: '/bewertungen'
       path: '/bewertungen'
@@ -133,6 +158,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BewertungenRoute: BewertungenRoute,
+  KontaktRoute: KontaktRoute,
   LeistungenRoute: LeistungenRoute,
   ReifenserviceRoute: ReifenserviceRoute,
   UeberUnsRoute: UeberUnsRoute,
