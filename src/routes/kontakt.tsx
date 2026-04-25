@@ -412,18 +412,20 @@ function ContactPage() {
                       }
                       rows={5}
                       maxLength={1500}
+                      enterKeyHint="enter"
+                      className="text-base min-h-[140px]"
                     />
                   </Field>
                 </div>
 
-                <label className="mt-6 flex items-start gap-3 text-sm">
+                <label className="mt-6 flex items-start gap-3 text-sm cursor-pointer">
                   <input
                     type="checkbox"
                     checked={form.consent}
                     onChange={(e) => set("consent", e.target.checked)}
-                    className="mt-1 h-4 w-4 rounded border-border accent-primary"
+                    className="mt-1 h-5 w-5 rounded border-border accent-primary shrink-0"
                   />
-                  <span className="text-muted-foreground">
+                  <span className="text-muted-foreground leading-relaxed">
                     Ich bin damit einverstanden, dass meine Angaben zur
                     Bearbeitung der Anfrage verwendet werden. *
                   </span>
@@ -436,7 +438,7 @@ function ContactPage() {
                   type="submit"
                   size="lg"
                   disabled={submitting}
-                  className="mt-6 w-full sm:w-auto rounded-full px-8"
+                  className="mt-6 w-full sm:w-auto rounded-full px-8 h-12 text-base"
                 >
                   {submitting ? (
                     <>
