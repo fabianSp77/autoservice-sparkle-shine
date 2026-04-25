@@ -101,7 +101,7 @@ export function SiteFooter() {
             <li><Link to="/reifenservice" className="hover:text-gold transition-colors">Reifenservice</Link></li>
             <li><Link to="/ueber-uns" className="hover:text-gold transition-colors">Über uns</Link></li>
             <li><Link to="/bewertungen" className="hover:text-gold transition-colors">Bewertungen</Link></li>
-            <li><Link to="/kontakt" className="hover:text-gold transition-colors">Termin buchen</Link></li>
+            <li><Link to="/kontakt" className="hover:text-gold transition-colors">Kontakt</Link></li>
           </ul>
         </div>
       </div>

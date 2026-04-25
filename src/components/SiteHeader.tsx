@@ -10,7 +10,7 @@ const NAV = [
   { to: "/reifenservice", label: "Reifenservice" },
   { to: "/ueber-uns", label: "Über uns" },
   { to: "/bewertungen", label: "Bewertungen" },
-  { to: "/kontakt", label: "Kontakt & Termin" },
+  { to: "/kontakt", label: "Kontakt" },
 ] as const;
 
 export function SiteHeader() {
