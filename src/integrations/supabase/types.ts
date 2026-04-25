@@ -21,12 +21,12 @@ export type Database = {
           id: string
           message: string | null
           name: string
-          phone: string
+          phone: string | null
           requested_date: string | null
           requested_time: string | null
-          service: string
+          service: string | null
           status: string
-          vehicle: string
+          vehicle: string | null
         }
         Insert: {
           created_at?: string
@@ -34,12 +34,12 @@ export type Database = {
           id?: string
           message?: string | null
           name: string
-          phone: string
+          phone?: string | null
           requested_date?: string | null
           requested_time?: string | null
-          service: string
+          service?: string | null
           status?: string
-          vehicle: string
+          vehicle?: string | null
         }
         Update: {
           created_at?: string
@@ -47,12 +47,33 @@ export type Database = {
           id?: string
           message?: string | null
           name?: string
-          phone?: string
+          phone?: string | null
           requested_date?: string | null
           requested_time?: string | null
-          service?: string
+          service?: string | null
           status?: string
-          vehicle?: string
+          vehicle?: string | null
+        }
+        Relationships: []
+      }
+      rate_limits: {
+        Row: {
+          bucket: string
+          created_at: string
+          id: string
+          key: string
+        }
+        Insert: {
+          bucket: string
+          created_at?: string
+          id?: string
+          key: string
+        }
+        Update: {
+          bucket?: string
+          created_at?: string
+          id?: string
+          key?: string
         }
         Relationships: []
       }
