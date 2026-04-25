@@ -136,13 +136,13 @@ function HomePage() {
             Familienbetrieb · Seit {SITE.founded} · Eurasburg-Beuerberg
           </p>
           <h1
-            className="mt-5 font-serif text-4xl sm:text-6xl md:text-7xl leading-[1.05] text-balance max-w-3xl fade-in-up"
+            className="mt-5 font-serif text-3xl sm:text-5xl md:text-6xl leading-[1.05] text-balance max-w-3xl fade-in-up"
             style={{ animationDelay: "60ms" }}
           >
             Ihre Werkstatt im Herzen von Beuerberg.
           </h1>
           <p
-            className="mt-6 text-base sm:text-lg md:text-xl text-background/85 max-w-2xl text-pretty fade-in-up"
+            className="mt-5 text-base sm:text-lg text-background/90 max-w-2xl text-pretty fade-in-up"
             style={{ animationDelay: "120ms" }}
           >
             Service, Reparatur und Reifen — ehrlich, persönlich und auf
