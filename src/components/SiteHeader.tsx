@@ -3,7 +3,6 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { Phone, Menu, X } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import { GoogleRatingBadge } from "./GoogleRatingBadge";
 
 const NAV = [
   { to: "/", label: "Start" },
@@ -11,7 +10,7 @@ const NAV = [
   { to: "/reifenservice", label: "Reifenservice" },
   { to: "/ueber-uns", label: "Über uns" },
   { to: "/bewertungen", label: "Bewertungen" },
-  { to: "/kontakt", label: "Kontakt & Termin" },
+  { to: "/kontakt", label: "Kontakt" },
 ] as const;
 
 export function SiteHeader() {
@@ -75,8 +74,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 md:gap-3">
-          <GoogleRatingBadge variant="compact" className="hidden md:inline-flex" />
+        <div className="flex items-center gap-2">
           <a
             href={`tel:${SITE.phoneIntl}`}
             className="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary-hover transition-colors shadow-warm"

@@ -142,21 +142,26 @@ function HomePage() {
             className="mt-8 flex flex-col sm:flex-row gap-3 fade-in-up"
             style={{ animationDelay: "200ms" }}
           >
-            <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all hover:shadow-elegant shadow-warm"
-            >
-              <CalendarCheck className="h-4 w-4" />
-              Termin online buchen
-            </Link>
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-background/10 backdrop-blur border border-background/30 px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all hover:shadow-elegant shadow-warm"
             >
               <Phone className="h-4 w-4" />
               {SITE.phone}
             </a>
+            <Link
+              to="/kontakt"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background/10 backdrop-blur border border-background/30 px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+            >
+              Schriftlich anfragen
+            </Link>
           </div>
+          <p
+            className="mt-3 text-xs text-background/75 fade-in-up"
+            style={{ animationDelay: "230ms" }}
+          >
+            <strong className="text-background">24/7 telefonisch erreichbar</strong> — persönlich Mo–Fr 8–17 Uhr, außerhalb über unseren Telefonassistenten
+          </p>
           <div
             className="mt-6 flex items-center gap-3 fade-in-up"
             style={{ animationDelay: "260ms" }}
@@ -370,7 +375,7 @@ function HomePage() {
               to="/bewertungen"
               className="inline-flex items-center gap-2 text-sm font-semibold text-gold hover:gap-3 transition-all"
             >
-              Alle {REVIEWS_SUMMARY.count}+ Bewertungen lesen <ArrowRight className="h-4 w-4" />
+              Alle {REVIEWS_SUMMARY.count} Bewertungen auf Google ansehen <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
@@ -482,25 +487,25 @@ function HomePage() {
         />
         <div className="container-tight relative text-center text-primary-foreground">
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-balance max-w-2xl mx-auto">
-            Bereit für einen Termin? Wir kümmern uns um den Rest.
+            Bereit für Ihren Termin? Ein Anruf genügt.
           </h2>
           <p className="mt-4 text-primary-foreground/85 max-w-xl mx-auto">
-            Buchen Sie online oder rufen Sie uns einfach an — wir finden
-            gemeinsam den passenden Termin.
+            Persönlich Mo–Fr 8–17 Uhr — außerhalb nimmt unser Telefonassistent
+            <strong className="text-primary-foreground"> rund um die Uhr</strong> Ihre Terminwünsche entgegen.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-background text-foreground px-6 py-3.5 text-sm font-semibold hover:bg-background/90 transition-colors shadow-warm"
-            >
-              <CalendarCheck className="h-4 w-4" /> Termin online buchen
-            </Link>
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-background/40 bg-background/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background text-foreground px-6 py-3.5 text-sm font-semibold hover:bg-background/90 transition-colors shadow-warm"
             >
               <Phone className="h-4 w-4" /> {SITE.phone}
             </a>
+            <Link
+              to="/kontakt"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-background/40 bg-background/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+            >
+              Schriftlich kontaktieren
+            </Link>
           </div>
         </div>
       </section>

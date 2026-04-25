@@ -144,18 +144,18 @@ function LeistungenPage() {
             unsere Partner.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:bg-primary-hover transition-colors"
-            >
-              Termin anfragen
-            </Link>
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-muted transition-colors"
+              className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:bg-primary-hover transition-colors"
             >
               {SITE.phone}
             </a>
+            <Link
+              to="/kontakt"
+              className="inline-flex items-center justify-center rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold hover:bg-muted transition-colors"
+            >
+              Schriftlich anfragen
+            </Link>
           </div>
         </div>
       </section>
