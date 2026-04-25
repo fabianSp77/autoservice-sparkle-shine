@@ -110,7 +110,7 @@ const REVIEWS = [
 
 function HomePage() {
   return (
-    <>
+    <div>
       {/* HERO */}
       <section className="relative min-h-[100svh] flex items-end overflow-hidden">
         <img
@@ -503,6 +503,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
