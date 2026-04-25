@@ -19,6 +19,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { MapEmbed } from "@/components/MapEmbed";
 
 const SERVICE_OPTIONS = [
   "Inspektion / Wartung",

@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Award, HeartHandshake, Sparkles, Users } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SITE } from "@/lib/site";
-import teamImg from "@/assets/team-fischer.jpg";
-import landschaftImg from "@/assets/beuerberg-landschaft.jpg";
-import serviceImg from "@/assets/service-detail.jpg";
+import teamImg from "@/assets/real/foto-02.jpg";
+import landschaftImg from "@/assets/real/foto-08.jpg";
+import serviceImg from "@/assets/real/foto-04.jpg";
 
 export const Route = createFileRoute("/ueber-uns")({
   head: () => ({
