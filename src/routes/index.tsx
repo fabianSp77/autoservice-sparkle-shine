@@ -190,15 +190,15 @@ function HomePage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
+          {/* Mobile-only Trust-Zeile (Desktop zeigt Stats-Bar unten) */}
           <div
-            className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 fade-in-up"
+            className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 fade-in-up md:hidden"
             style={{ animationDelay: "260ms" }}
           >
             <GoogleRatingBadge variant="dark" />
             <p className="text-xs text-background/75">
               <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 mr-2 align-middle animate-pulse" />
-              <strong className="text-background">24/7 telefonisch erreichbar</strong>
-              <span className="text-background/60"> — Mo–Fr persönlich, sonst über Telefonassistent</span>
+              <strong className="text-background">24/7 erreichbar</strong>
             </p>
           </div>
         </div>
