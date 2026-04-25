@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SITE } from "@/lib/site";
+import heroImg from "@/assets/real/foto-04.jpg";
 
 export const Route = createFileRoute("/leistungen")({
   head: () => ({
@@ -91,6 +92,9 @@ function LeistungenPage() {
         eyebrow="Werkstatt-Leistungen"
         title="Alles, was Ihr Auto braucht — unter einem Dach."
         subtitle="Vom routinemäßigen Ölwechsel bis zur komplexen Reparatur. Wir betreuen alle Marken mit moderner Diagnosetechnik und ehrlichem Handwerk."
+        breadcrumbs={[{ label: "Leistungen" }]}
+        image={heroImg}
+        imageAlt="Detailaufnahme aus der Werkstatt — Autoservice Beuerberg"
       />
 
       <section className="py-16 md:py-20">

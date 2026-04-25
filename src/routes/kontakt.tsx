@@ -184,6 +184,7 @@ function ContactPage() {
         eyebrow="Kontakt & Termin"
         title="Termin online — oder rund um die Uhr per Telefon."
         subtitle="Tragen Sie bis zu drei Wunschtermine ein und wählen Sie alle gewünschten Leistungen aus. Wir bestätigen innerhalb eines Werktages."
+        breadcrumbs={[{ label: "Kontakt & Termin" }]}
       />
 
       <section className="pb-20">

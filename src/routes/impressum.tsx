@@ -16,7 +16,7 @@ export const Route = createFileRoute("/impressum")({
 function Impressum() {
   return (
     <>
-      <PageHero eyebrow="Rechtliches" title="Impressum" subtitle="Angaben gemäß § 5 TMG" />
+      <PageHero eyebrow="Rechtliches" title="Impressum" subtitle="Angaben gemäß § 5 TMG" breadcrumbs={[{ label: "Impressum" }]} showTrustStrip={false} />
       <section className="pb-20">
         <div className="container-tight max-w-2xl prose-like">
           <Block title="Anbieter">
@@ -39,11 +39,17 @@ function Impressum() {
             <p>{SITE.owners.join(", ")}</p>
           </Block>
 
-          <Block title="Registereintrag & USt-ID">
+          <Block title="Registereintrag">
+            <p>
+              Eingetragen im Handelsregister<br />
+              Registergericht: {SITE.registerCourt}<br />
+              Registernummer: {SITE.registerNumber}
+            </p>
+          </Block>
+
+          <Block title="Umsatzsteuer-ID">
             <p className="text-muted-foreground">
-              Eintragung im Handelsregister – Registergericht und HRB-Nummer
-              werden vom Inhaber ergänzt. Umsatzsteuer-Identifikationsnummer
-              gemäß § 27 a UStG: wird ergänzt.
+              Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: wird auf Anfrage mitgeteilt.
             </p>
           </Block>
 

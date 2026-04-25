@@ -35,6 +35,8 @@ function ReviewsPage() {
         eyebrow="Echte Google-Bewertungen"
         title="Vertrauen, das man hört."
         subtitle="Hier zeigen wir die aktuellen Rezensionen, die unsere Kundinnen und Kunden direkt auf Google hinterlassen haben — ungefiltert und tagesaktuell."
+        breadcrumbs={[{ label: "Bewertungen" }]}
+        showTrustStrip={false}
       >
         <RatingHeader data={data} />
       </PageHero>
