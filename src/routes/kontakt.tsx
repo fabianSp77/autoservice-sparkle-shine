@@ -69,6 +69,7 @@ type FormState = {
   services: string[];
   message: string;
   consent: boolean;
+  website: string; // Honeypot — muss leer bleiben
 };
 
 const INITIAL: FormState = {
@@ -76,6 +77,7 @@ const INITIAL: FormState = {
   name: "", phone: "", email: "", vehicle: "",
   services: [],
   message: "", consent: false,
+  website: "",
 };
 
 export const Route = createFileRoute("/kontakt")({
@@ -295,6 +297,8 @@ function ContactPage() {
                       onChange={(e) => set("name", e.target.value)}
                       placeholder="Max Mustermann"
                       autoComplete="name"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
                   <Field label="Telefon (optional)" error={errors.phone} id="phone">
@@ -305,6 +309,9 @@ function ContactPage() {
                       placeholder="0151 12345678"
                       type="tel"
                       autoComplete="tel"
+                      inputMode="tel"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
                   <Field label="E-Mail *" error={errors.email} id="email" className="sm:col-span-2">
@@ -315,6 +322,9 @@ function ContactPage() {
                       placeholder="ihre@email.de"
                       type="email"
                       autoComplete="email"
+                      inputMode="email"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
                   <Field
@@ -328,8 +338,25 @@ function ContactPage() {
                       value={form.vehicle}
                       onChange={(e) => set("vehicle", e.target.value)}
                       placeholder="z. B. VW Golf VII, 2018"
+                      autoComplete="off"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
+                </div>
+
+                {/* Honeypot — visuell verborgen, von Bots aber befüllt */}
+                <div aria-hidden="true" className="absolute left-[-9999px] w-px h-px overflow-hidden">
+                  <label htmlFor="website-hp">Website (bitte freilassen)</label>
+                  <input
+                    id="website-hp"
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={(e) => set("website", e.target.value)}
+                  />
                 </div>
 
                 {/* Leistungen — nur bei "services" */}
