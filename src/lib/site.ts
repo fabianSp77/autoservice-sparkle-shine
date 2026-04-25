@@ -23,13 +23,14 @@ export const SITE = {
     { day: "Sa & So", time: "Geschlossen" },
   ],
   owners: ["Jürgen Fischer", "Monika Fischer", "Ludwig Fischer"],
+  // Verifiziert: NorthData / Amtsgericht München
+  registerCourt: "Amtsgericht München",
+  registerNumber: "HRB 177787",
   mapsEmbed:
     "https://www.google.com/maps?q=Autoservice+Beuerberg+GmbH,+Bahnhofstra%C3%9Fe+45,+82547+Eurasburg&output=embed",
   mapsLink:
     "https://www.google.com/maps/place/Autoservice+Beuerberg+GmbH/@47.8285867,11.4072894,17z",
-  // Place ID aus der Google-Maps-URL des Eintrags
   googlePlaceId: "ChIJZahmrqe4nUcR54emC0uv9SQ",
-  // Direktlink zum Bewertungsformular auf Google
   googleReviewLink:
     "https://search.google.com/local/writereview?placeid=ChIJZahmrqe4nUcR54emC0uv9SQ",
   facebookUrl: "https://www.facebook.com/AutoserviceBeuerberg/",
