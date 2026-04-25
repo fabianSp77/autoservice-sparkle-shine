@@ -1,75 +1,66 @@
-## Website für Autoservice Beuerberg GmbH
+## Recherche-Ergebnisse (verifiziert)
 
-Eine vertrauensvolle, bayerisch-warme Premium-Website für den Familienbetrieb (Familie Fischer, seit 2009) in Beuerberg.
+**Firmendaten (aus Gelbe Seiten, Das Örtliche, Das Gelbe Blatt):**
+- Name: Autoservice Beuerberg GmbH
+- Inhaber: Jürgen & Monika Fischer (Familienunternehmen, Sohn Ludwig im Betrieb)
+- Gegründet: 2009 (Neubau begann 2008, viel Eigenleistung)
+- Adresse: Bahnhofstr. 45, 82547 Eurasburg-Beuerberg
+- Telefon: 08179 92 92 44
+- Öffnungszeiten: Mo–Fr 08:00–17:00 (Sa/So geschlossen — laut Gelbe Seiten)
+- Fotos: 17 Originalbilder verfügbar bei dasgelbeblatt.de (`assets/images/28/487/28487*-autoservice-beuerberg-*.jpg`)
 
-### Recherchierte Eckdaten
-- **Adresse:** Bahnhofstraße 45, 82547 Eurasburg-Beuerberg
-- **Telefon:** 08179 929244
-- **Familienbetrieb** seit 2009, gegründet von Jürgen & Monika Fischer, heute mit Sohn Ludwig Fischer
-- Lage: Voralpenland zwischen Tölz, Wolfratshausen und Tegernsee
+**Google-Bewertungen:** Direktes Scraping ist nicht zuverlässig möglich (Google rendert clientseitig, blockiert Bots). Echte Bewertungen lassen sich nur über die **Google Places API** holen — dafür braucht es einen Google Maps Platform API Key vom Inhaber.
 
-### Design-Richtung: Bayerisch & Vertrauensvoll
-- **Farbpalette:** Warmes Anthrazit als Basis, sattes Bayrisch-Blau (#1E5AA8) als Primärfarbe, gebrochenes Weiß/Creme (#F8F4EC), warmes Holzbraun-Akzent
-- **Typografie:** Serif-Headlines (Playfair Display oder Fraunces) für Wärme & Tradition, Inter für klare Fließtexte
-- **Bildsprache:** Werkstatt-Atmosphäre, Berge im Hintergrund, persönliche Team-Fotos (Platzhalter), warmes Licht
-- Subtile bayerische Elemente (dezente Rauten-Texturen, keine Klischees)
-- Smooth Scroll-Animationen, sanftes Fade-in beim Scrollen
+**Facebook:** Profil existiert, aber Facebook blockiert Scraping. Wir können aber das offizielle **Facebook Page Plugin** als iFrame einbetten (zeigt automatisch die letzten Posts) — funktioniert nur mit der echten Page-URL des Inhabers.
 
-### Seitenstruktur (separate TanStack-Routen)
+---
 
-**1. Startseite (`/`)**
-- Hero: Großes Werkstatt-/Berg-Bild, Headline „Ihre Werkstatt im Herzen von Beuerberg", Sub: „Familienbetrieb seit 2009", CTA „Termin online buchen" + „Anrufen"
-- Vertrauens-Strip: „Seit 2009 · Familiengeführt · Alle Marken · Meisterbetrieb"
-- Leistungs-Übersicht (6 Kacheln mit Icons)
-- Über-uns-Teaser (Familie Fischer, kurzer Text + Bild)
-- Reifenservice-Highlight (Saisonservice & Einlagerung)
-- Bewertungs-Karussell (3-4 Top-Reviews)
-- Standort-Sektion mit Karte & Öffnungszeiten
-- Kontakt-CTA
+## Plan: Was umgesetzt wird
 
-**2. Leistungen (`/leistungen`)**
-- Inspektion & Wartung, HU/AU, Reparaturen aller Marken, Klimaservice, Bremsen/Auspuff, Unfallinstandsetzung, Reifen & Räder, Fahrzeugaufbereitung
-- Jede Leistung mit Beschreibung, Icon, optional Richtpreis-Hinweis
+### 1. Verifizierte Stammdaten in `src/lib/site.ts` aktualisieren
+- Öffnungszeiten korrigieren auf **Mo–Fr 08:00–17:00** (Sa/So geschlossen)
+- Telefonnummer bestätigen: `08179 929244`
+- Inhaber & Gründungsjahr bestätigt im About-Bereich
 
-**3. Reifenservice & Saison (`/reifenservice`)**
-- Reifenwechsel, Einlagerung mit Hotel-Konzept, Reifenkauf-Beratung
-- Saison-Reminder, Online-Anfrage-Formular (Fahrzeug, Reifengröße, gewünschter Termin)
-- Vorteile-Liste, Preisorientierung
+### 2. Echte Werkstatt-Fotos einbauen (statt KI-generierter Bilder)
+- 6–8 der 17 Originalbilder von dasgelbeblatt.de via Build-Skript herunterladen
+- Lokal in `src/assets/real/` ablegen (lizenzrechtlicher Hinweis: Bilder sind © Autoservice Beuerberg laut Quelle)
+- Hero-, Werkstatt- und Service-Bilder ersetzen
+- Galerie-Sektion auf Startseite + `/ueber-uns` mit echten Bildern
 
-**4. Über uns (`/ueber-uns`)**
-- Familiengeschichte seit 2009, Werte, Meisterbetrieb-Qualität
-- Team-Sektion (Jürgen, Monika, Ludwig + Mitarbeiter-Platzhalter)
-- Werkstatt-Galerie
+### 3. Echte Google-Bewertungen via Places API
+- Edge Route `/api/reviews` (server function) holt Reviews via Google Places API (`place_id` ist bekannt: `ChIJZahmrqe4nUcR54emC0uv9SQ`)
+- Caching: 24h serverseitig im Memory + via TanStack Query auf Client
+- Fallback-UI wenn API-Key fehlt: Hinweis + Link zum Google-Profil
+- **Wir benötigen vom Inhaber einen `GOOGLE_MAPS_API_KEY` mit aktivierter Places API** — wird via `add_secret` angefragt, sobald der Plan genehmigt ist
+- Anzeige: Sterne-Schnitt, Anzahl, 3–5 jüngste Reviews mit Autor, Datum, Text auf `/bewertungen` + Teaser auf Startseite
+- "Bewertung schreiben"-Button verlinkt direkt auf das Google-Bewertungsformular
 
-**5. Bewertungen (`/bewertungen`)**
-- Kundenstimmen-Grid mit Sternen
-- Vorher/Nachher-Beispiele möglich
-- Link zu Google-Bewertungen
+### 4. Facebook-Integration
+- Footer + Header: Facebook-Icon-Link zur Page
+- `/bewertungen` (oder neuer Bereich auf Startseite): **Facebook Page Plugin** als iFrame eingebettet, zeigt die letzten Posts in einem schmalen Widget (300×500px)
+- **Wir benötigen die exakte Facebook-Page-URL** — Inhaber muss bestätigen (z.B. `facebook.com/AutoserviceBeuerberg`); wird per `ask_questions` nachgefragt
 
-**6. Kontakt & Termin (`/kontakt`)**
-- Online-Terminbuchung: Formular mit Name, Telefon, E-Mail, Fahrzeug (Marke/Modell/Bj.), Servicewahl (Dropdown), Wunschdatum, Wunschuhrzeit, Nachricht
-- Allgemeines Kontaktformular
-- Eingebettete Google Maps Karte mit Standort
-- Adresse, Telefon, E-Mail, Öffnungszeiten klar dargestellt
-- Anfahrtsbeschreibung
+### 5. Impressum + Datenschutz (Pflicht in DE)
+- `/impressum` mit echten Daten (Geschäftsführer, HRB falls bekannt, USt-ID Platzhalter)
+- `/datenschutz` mit Hinweisen zu Google Maps, Google Reviews API, Facebook-Embed (Cookies)
 
-### Funktionen
-- **Online-Terminbuchung:** Formular speichert Anfrage + sendet E-Mail an Werkstatt + Bestätigungs-E-Mail an Kunden
-- **Kontaktformular:** Per E-Mail an Werkstatt, Bestätigung an Kunde
-- **Google Maps:** Eingebettete Karte mit Marker auf der Kontaktseite
-- Sticky Header mit „Anrufen"-Button (Mobile prominent)
-- Footer mit Kontakt, Öffnungszeiten, Schnell-Links, Impressum-/Datenschutz-Platzhalter
+### 6. Cookie-Hinweis
+- Da Facebook-Embed und Google Maps Tracker setzen, dezenter Consent-Banner (eigene minimale Lösung, keine Zusatz-Library)
 
-### Technische Umsetzung
-- TanStack Start mit separater Route pro Seite (eigene SEO-Meta-Tags je Seite)
-- Tailwind v4 + benutzerdefiniertes Designsystem in `src/styles.css` (Bayrisch-Blau, Creme, Anthrazit als HSL/oklch Tokens)
-- shadcn-Komponenten für Form, Input, Select, Calendar, Card, Button, Toast
-- Lovable Cloud aktivieren für: Termin-/Kontakt-Formular-Speicherung in DB + Lovable Email für Versand
-- Zod-Validierung aller Formulareingaben
-- Google Maps via einfacher iframe-Einbettung (kein API-Key nötig)
-- Voll responsiv, Mobile-First, A11y, sauberes SEO (Title, Meta, OG-Tags pro Route)
+---
 
-### Hinweis zu Inhalten
-- Texte werden professionell und vertrauensvoll auf Deutsch verfasst
-- Bilder sind hochwertige Platzhalter (Werkstatt-/Bergbilder), die Familie Fischer kann später eigene Fotos einsetzen
-- Impressum/Datenschutz als Platzhalter — die echten Texte muss die Werkstatt rechtssicher selbst einsetzen
+## Was wir vom Inhaber brauchen (nach Plan-Genehmigung)
+
+1. **Facebook-Page-URL** bestätigen
+2. **Google Maps API Key** (mit Places API enabled) — Anleitung wird mitgeliefert
+3. Optional: Eigene Logo-Datei
+4. Optional: Höher aufgelöste Original-Bilder (sonst nehmen wir die aus dem Presseartikel)
+
+## Technische Details
+
+- Bilder-Download als einmaliges Build-Skript (`scripts/fetch-images.ts`), Bilder werden als statische Assets eingecheckt
+- Google Places API call: `https://maps.googleapis.com/maps/api/place/details/json?place_id=...&fields=reviews,rating,user_ratings_total&key=...`
+- Cache-Layer: serverseitiger In-Memory-Cache mit 24h TTL (Places API Pricing schonen)
+- Facebook Plugin: `https://www.facebook.com/plugins/page.php` iframe, kein API-Key nötig
+- Cookie-Consent-State in `localStorage`, Embeds erst nach Zustimmung geladen
