@@ -18,10 +18,15 @@ import {
 } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "@/components/PageHero";
-import heroImg from "@/assets/hero-werkstatt.jpg";
-import teamImg from "@/assets/team-fischer.jpg";
-import reifenImg from "@/assets/reifenservice.jpg";
-import landschaftImg from "@/assets/beuerberg-landschaft.jpg";
+import { MapEmbed } from "@/components/MapEmbed";
+import heroImg from "@/assets/real/foto-01.jpg";
+import teamImg from "@/assets/real/foto-02.jpg";
+import reifenImg from "@/assets/real/foto-05.jpg";
+import detailImg from "@/assets/real/foto-04.jpg";
+import gallery1 from "@/assets/real/foto-03.jpg";
+import gallery2 from "@/assets/real/foto-06.jpg";
+import gallery3 from "@/assets/real/foto-07.jpg";
+import gallery4 from "@/assets/real/foto-08.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -424,23 +429,47 @@ function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden shadow-elegant border border-border">
-              <iframe
-                src={SITE.mapsEmbed}
-                title="Standort Autoservice Beuerberg auf Google Maps"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-full w-full border-0"
-              />
-            </div>
+            <MapEmbed className="aspect-[4/3] lg:aspect-square shadow-elegant" />
           </div>
         </div>
       </section>
 
+      {/* GALERIE — echte Werkstattfotos */}
+      <section className="pb-20 md:pb-28">
+        <div className="container-tight">
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.22em] text-primary font-medium">
+              Einblicke
+            </p>
+            <h2 className="mt-3 font-serif text-3xl md:text-4xl text-balance">
+              Ein Blick in unsere Werkstatt.
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              Modernes Equipment, viel Platz und ein eingespieltes Team — so
+              sieht Werkstatt heute aus.
+            </p>
+          </div>
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {[gallery1, gallery2, gallery3, gallery4].map((src, i) => (
+              <div key={i} className="aspect-square rounded-2xl overflow-hidden bg-cream border border-border">
+                <img
+                  src={src}
+                  alt={`Eindruck aus dem Autoservice Beuerberg ${i + 1}`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+
       {/* CTA */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         <img
-          src={landschaftImg}
+          src={detailImg}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"

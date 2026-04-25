@@ -19,6 +19,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { MapEmbed } from "@/components/MapEmbed";
 
 const SERVICE_OPTIONS = [
   "Inspektion / Wartung",
@@ -351,15 +352,7 @@ function ContactPage() {
                 ))}
               </ul>
             } />
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-border shadow-soft">
-              <iframe
-                src={SITE.mapsEmbed}
-                title="Standort auf Google Maps"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-full w-full border-0"
-              />
-            </div>
+            <MapEmbed className="aspect-[4/3]" />
           </aside>
         </div>
       </section>
