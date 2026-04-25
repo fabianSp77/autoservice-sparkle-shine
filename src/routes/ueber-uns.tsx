@@ -57,6 +57,9 @@ function AboutPage() {
         eyebrow={`Familie Fischer · seit ${SITE.founded}`}
         title="Eine Werkstatt mit Handschlag-Qualität."
         subtitle="2009 gründeten Jürgen und Monika Fischer ihren Autoservice in der Bahnhofstraße. Heute führen sie den Betrieb gemeinsam mit ihrem Sohn Ludwig — und einem eingespielten Team aus erfahrenen Mechanikern."
+        breadcrumbs={[{ label: "Über uns" }]}
+        image={teamImg}
+        imageAlt="Team und Familie Fischer — Autoservice Beuerberg"
       />
 
       <section className="py-16 md:py-20">

@@ -16,7 +16,7 @@ export const Route = createFileRoute("/datenschutz")({
 function Datenschutz() {
   return (
     <>
-      <PageHero eyebrow="Rechtliches" title="Datenschutz" subtitle="Informationen zur Verarbeitung personenbezogener Daten." />
+      <PageHero eyebrow="Rechtliches" title="Datenschutz" subtitle="Informationen zur Verarbeitung personenbezogener Daten." breadcrumbs={[{ label: "Datenschutz" }]} showTrustStrip={false} />
       <section className="pb-20">
         <div className="container-tight max-w-2xl">
           <Block title="1. Verantwortlicher">

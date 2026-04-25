@@ -39,6 +39,9 @@ function ReifenPage() {
         eyebrow="Reifen & Saisonservice"
         title="Reifenwechsel, Verkauf und Einlagerung — alles aus einer Hand."
         subtitle="Sommer, Winter oder Ganzjahr: Wir wechseln, wuchten und lagern Ihre Räder fachgerecht ein. Pünktlich zur Saison wieder einsatzbereit."
+        breadcrumbs={[{ label: "Reifenservice" }]}
+        image={reifenImg}
+        imageAlt="Reifenservice und Reifenhotel im Autoservice Beuerberg"
       />
 
       <section className="py-16 md:py-20">
