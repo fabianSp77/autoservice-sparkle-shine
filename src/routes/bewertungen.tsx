@@ -267,8 +267,8 @@ function FacebookSection() {
             Werkstatt — direkt aus Beuerberg.
           </p>
         </div>
-        <div className="max-w-3xl mx-auto">
-          <FacebookFeed height={560} width={800} />
+        <div className="mx-auto" style={{ maxWidth: 500 }}>
+          <FacebookFeed height={640} width={500} />
         </div>
       </div>
     </section>
