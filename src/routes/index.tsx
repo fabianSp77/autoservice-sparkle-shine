@@ -142,21 +142,26 @@ function HomePage() {
             className="mt-8 flex flex-col sm:flex-row gap-3 fade-in-up"
             style={{ animationDelay: "200ms" }}
           >
-            <Link
-              to="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all hover:shadow-elegant shadow-warm"
-            >
-              <CalendarCheck className="h-4 w-4" />
-              Termin online buchen
-            </Link>
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-background/10 backdrop-blur border border-background/30 px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all hover:shadow-elegant shadow-warm"
             >
               <Phone className="h-4 w-4" />
               {SITE.phone}
             </a>
+            <Link
+              to="/kontakt"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background/10 backdrop-blur border border-background/30 px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+            >
+              Schriftlich anfragen
+            </Link>
           </div>
+          <p
+            className="mt-3 text-xs text-background/75 fade-in-up"
+            style={{ animationDelay: "230ms" }}
+          >
+            <strong className="text-background">24/7 telefonisch erreichbar</strong> — persönlich Mo–Fr 8–17 Uhr, außerhalb über unseren Telefonassistenten
+          </p>
           <div
             className="mt-6 flex items-center gap-3 fade-in-up"
             style={{ animationDelay: "260ms" }}
