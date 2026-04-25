@@ -243,7 +243,7 @@ function ContactPage() {
               <form
                 onSubmit={onSubmit}
                 noValidate
-                className="rounded-3xl bg-card border border-border p-6 sm:p-8 shadow-soft"
+                className="relative rounded-3xl bg-card border border-border p-6 sm:p-8 shadow-soft"
               >
                 <h2 className="font-serif text-2xl">Schreiben Sie uns</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
