@@ -19,7 +19,7 @@ import {
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "@/components/PageHero";
 import { MapEmbed } from "@/components/MapEmbed";
-import heroImg from "@/assets/real/foto-01.jpg";
+import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/foto-02.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
 import detailImg from "@/assets/real/foto-04.jpg";
@@ -112,37 +112,37 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative min-h-[100svh] flex items-end overflow-hidden">
+      <section className="relative flex items-end overflow-hidden min-h-[68svh] md:min-h-[72svh] lg:min-h-[78svh]">
         <img
           src={heroImg}
-          alt="Werkstatt von Autoservice Beuerberg mit Blick auf die bayerischen Alpen"
+          alt="Autoservice Beuerberg GmbH — Kfz-Meisterbetrieb in Beuerberg"
           width={1920}
           height={1080}
           className="absolute inset-0 h-full w-full object-cover"
           fetchPriority="high"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/55 to-foreground/20"
+          className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/65 to-foreground/30"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-foreground/70 via-transparent to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-foreground/75 via-foreground/20 to-transparent"
           aria-hidden
         />
-        <div className="relative container-tight pb-16 md:pb-24 pt-32 md:pt-40 text-background">
+        <div className="relative container-tight pb-12 md:pb-20 pt-28 md:pt-36 text-background">
           <p
             className="text-xs sm:text-sm uppercase tracking-[0.28em] text-gold font-medium fade-in-up"
           >
             Familienbetrieb · Seit {SITE.founded} · Eurasburg-Beuerberg
           </p>
           <h1
-            className="mt-5 font-serif text-4xl sm:text-6xl md:text-7xl leading-[1.05] text-balance max-w-3xl fade-in-up"
+            className="mt-5 font-serif text-3xl sm:text-5xl md:text-6xl leading-[1.05] text-balance max-w-3xl fade-in-up"
             style={{ animationDelay: "60ms" }}
           >
             Ihre Werkstatt im Herzen von Beuerberg.
           </h1>
           <p
-            className="mt-6 text-base sm:text-lg md:text-xl text-background/85 max-w-2xl text-pretty fade-in-up"
+            className="mt-5 text-base sm:text-lg text-background/90 max-w-2xl text-pretty fade-in-up"
             style={{ animationDelay: "120ms" }}
           >
             Service, Reparatur und Reifen — ehrlich, persönlich und auf
