@@ -33,10 +33,10 @@ export const SITE = {
   // Place-ID angewiesen zu sein.
   mapsLink:
     "https://www.google.com/maps/search/?api=1&query=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg",
-  // "Bewertung schreiben" über die offizielle Google-Suche — funktioniert
-  // ohne Place-ID, indem es den Eintrag namentlich auflöst.
+  // "Bewertung schreiben" — Google-Suche nach dem Eintrag; der "Rezension
+  // schreiben"-Button erscheint direkt im Knowledge-Panel rechts.
   googleReviewLink:
-    "https://www.google.com/search?q=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg#lrd=,1,,,,",
+    "https://www.google.com/search?q=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg",
   facebookUrl: "https://www.facebook.com/AutoserviceBeuerberg/",
   facebookHandle: "AutoserviceBeuerberg",
 } as const;
