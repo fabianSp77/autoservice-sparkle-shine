@@ -1,20 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Wrench,
-  Gauge,
-  Snowflake,
-  ShieldCheck,
-  CircleDot,
-  Sparkles,
-  Phone,
-  CalendarCheck,
-  ArrowRight,
-  Star,
-  MapPin,
-  Clock,
-  Award,
-  Users,
-  HeartHandshake,
+  Wrench, Gauge, Snowflake, ShieldCheck, CircleDot, Sparkles,
+  Phone, ArrowRight, Star, MapPin, Clock, Award, Users,
+  HeartHandshake, Quote, CalendarClock, Search, CheckCircle2,
+  Hammer, KeyRound,
 } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { SectionHeading } from "@/components/PageHero";
@@ -37,7 +26,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Familiengeführte Kfz-Werkstatt in Eurasburg-Beuerberg. Inspektion, HU/AU, Reparaturen aller Marken, Reifenservice & Klimaservice. Seit 2009 für Sie da.",
+          "Familiengeführte Kfz-Werkstatt in Eurasburg-Beuerberg seit 2009. Inspektion, HU/AU, Reparaturen aller Marken, Reifenservice & Klimaservice — 4,6★ auf Google.",
       },
       { property: "og:title", content: "Autoservice Beuerberg GmbH — Ihre Werkstatt im Voralpenland" },
       {
@@ -92,7 +81,40 @@ const TRUST = [
   { icon: ShieldCheck, label: "Faire, transparente Preise" },
 ];
 
-// Echte Google-Reviews — wir picken 3 prägnante Kurz-Bewertungen für die Startseite
+const ABLAUF = [
+  {
+    icon: Phone,
+    step: "01",
+    t: "Anruf oder Anfrage",
+    d: "Mo–Fr persönlich, sonst über unseren 24/7 Telefonassistenten.",
+  },
+  {
+    icon: CalendarClock,
+    step: "02",
+    t: "Termin & Erstgespräch",
+    d: "Wir besprechen Anliegen und Zeitfenster — ehrlich und ohne Zeitdruck.",
+  },
+  {
+    icon: Search,
+    step: "03",
+    t: "Diagnose & Kostenvoranschlag",
+    d: "Klare Aussage, was wirklich nötig ist — schriftlich, bevor wir loslegen.",
+  },
+  {
+    icon: Hammer,
+    step: "04",
+    t: "Fachgerechte Ausführung",
+    d: "Meisterwerkstatt-Qualität mit moderner Technik und geprüften Teilen.",
+  },
+  {
+    icon: KeyRound,
+    step: "05",
+    t: "Übergabe & Nachsorge",
+    d: "Erklärung der Arbeiten, Empfehlung für die nächste Wartung.",
+  },
+];
+
+// Echte Google-Reviews — kompakte Auswahl für die Startseite
 const HOME_REVIEWS = GOOGLE_REVIEWS.filter((r) =>
   ["Mia Oeckl", "Auto Linner", "Andreas M.", "Josef Fichtner"].includes(r.author),
 ).slice(0, 3);
@@ -101,7 +123,7 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative flex items-end overflow-hidden min-h-[68svh] md:min-h-[72svh] lg:min-h-[78svh]">
+      <section className="relative flex items-end overflow-hidden min-h-[78svh] md:min-h-[86svh] lg:min-h-[92svh]">
         <img
           src={heroImg}
           alt="Autoservice Beuerberg GmbH — Kfz-Meisterbetrieb in Beuerberg"
@@ -111,70 +133,100 @@ function HomePage() {
           fetchPriority="high"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/65 to-foreground/30"
+          className="absolute inset-0 bg-gradient-to-t from-foreground/95 via-foreground/70 to-foreground/35"
           aria-hidden
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-foreground/75 via-foreground/20 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/25 to-transparent"
           aria-hidden
         />
-        <div className="relative container-tight pb-12 md:pb-20 pt-28 md:pt-36 text-background">
-          <p
-            className="text-xs sm:text-sm uppercase tracking-[0.28em] text-gold font-medium fade-in-up"
-          >
+
+        {/* schwebendes Trust-Kärtchen oben rechts */}
+        <div className="hidden lg:flex absolute top-32 right-8 xl:right-16 items-center gap-3 rounded-2xl bg-background/95 backdrop-blur border border-background/20 p-4 shadow-elegant max-w-[16rem] fade-in-up" style={{ animationDelay: "300ms" }}>
+          <span className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-primary/10 text-primary shrink-0">
+            <ShieldCheck className="h-5 w-5" />
+          </span>
+          <div className="text-xs leading-snug">
+            <p className="font-semibold text-foreground">KFZ-Meisterbetrieb</p>
+            <p className="text-muted-foreground mt-0.5">Familie Fischer · seit {SITE.founded}</p>
+          </div>
+        </div>
+
+        <div className="relative container-tight pb-20 md:pb-28 pt-28 md:pt-36 text-background">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.28em] text-gold font-medium fade-in-up">
+            <span className="inline-block h-px w-8 bg-gold align-middle mr-3" />
             Familienbetrieb · Seit {SITE.founded} · Eurasburg-Beuerberg
           </p>
           <h1
-            className="mt-5 font-serif text-3xl sm:text-5xl md:text-6xl leading-[1.05] text-balance max-w-3xl fade-in-up"
+            className="mt-5 font-serif text-4xl sm:text-5xl md:text-7xl leading-[1.02] text-balance max-w-4xl fade-in-up"
             style={{ animationDelay: "60ms" }}
           >
             Ihre Werkstatt im Herzen von Beuerberg.
           </h1>
           <p
-            className="mt-5 text-base sm:text-lg text-background/90 max-w-2xl text-pretty fade-in-up"
+            className="mt-6 text-base sm:text-lg md:text-xl text-background/90 max-w-2xl text-pretty fade-in-up leading-relaxed"
             style={{ animationDelay: "120ms" }}
           >
             Service, Reparatur und Reifen — ehrlich, persönlich und auf
-            Meister­niveau. Familie Fischer und ihr Team sind seit über 15
+            Meisterniveau. Familie Fischer und ihr Team sind seit über 15
             Jahren für Sie da.
           </p>
           <div
-            className="mt-8 flex flex-col sm:flex-row gap-3 fade-in-up"
+            className="mt-9 flex flex-col sm:flex-row gap-3 fade-in-up"
             style={{ animationDelay: "200ms" }}
           >
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all hover:shadow-elegant shadow-warm"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-all hover:shadow-elegant shadow-warm"
             >
               <Phone className="h-4 w-4" />
               {SITE.phone}
             </a>
             <Link
               to="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-background/10 backdrop-blur border border-background/30 px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background/10 backdrop-blur border border-background/30 px-7 py-4 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
             >
               Schriftlich anfragen
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <p
-            className="mt-3 text-xs text-background/75 fade-in-up"
-            style={{ animationDelay: "230ms" }}
-          >
-            <strong className="text-background">24/7 telefonisch erreichbar</strong> — persönlich Mo–Fr 8–17 Uhr, außerhalb über unseren Telefonassistenten
-          </p>
           <div
-            className="mt-6 flex items-center gap-3 fade-in-up"
+            className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 fade-in-up"
             style={{ animationDelay: "260ms" }}
           >
             <GoogleRatingBadge variant="dark" />
+            <p className="text-xs text-background/75">
+              <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 mr-2 align-middle animate-pulse" />
+              <strong className="text-background">24/7 telefonisch erreichbar</strong>
+              <span className="text-background/60"> — Mo–Fr persönlich, sonst über Telefonassistent</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Stats-Bar im Hero unten */}
+        <div className="absolute bottom-0 inset-x-0 hidden md:block">
+          <div className="container-tight">
+            <div className="bg-background/95 backdrop-blur border-t border-x border-border rounded-t-2xl shadow-elegant grid grid-cols-4 divide-x divide-border">
+              {[
+                { v: REVIEWS_SUMMARY.rating.toFixed(1) + "★", l: "Google-Bewertung" },
+                { v: "15+", l: "Jahre Erfahrung" },
+                { v: "Alle", l: "Marken & Modelle" },
+                { v: "24/7", l: "Erreichbarkeit" },
+              ].map((s) => (
+                <div key={s.l} className="px-4 py-5 text-center">
+                  <p className="font-serif text-2xl lg:text-3xl text-foreground leading-none">{s.v}</p>
+                  <p className="mt-1.5 text-xs uppercase tracking-wider text-muted-foreground">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* TRUST STRIP */}
-      <section className="border-y border-border bg-cream-deep/50">
+      {/* TRUST STRIP — mobil & als Spacer */}
+      <section className="border-b border-border bg-cream-deep/50 md:hidden">
         <div className="container-tight py-6">
-          <ul className="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-6">
+          <ul className="grid grid-cols-2 gap-y-4 gap-x-6">
             {TRUST.map((t) => (
               <li key={t.label} className="flex items-center gap-3">
                 <span className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-primary/10 text-primary shrink-0">
@@ -188,6 +240,7 @@ function HomePage() {
           </ul>
         </div>
       </section>
+      <div className="hidden md:block h-6" aria-hidden />
 
       {/* LEISTUNGEN */}
       <section className="py-20 md:py-28">
@@ -207,22 +260,42 @@ function HomePage() {
           </div>
 
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SERVICES.map((s) => (
+            {SERVICES.map((s, i) => (
               <article
                 key={s.title}
-                className="group relative rounded-2xl bg-card border border-border p-7 hover:border-primary/30 hover:shadow-warm transition-all duration-300"
+                className="group relative rounded-3xl bg-card border border-border p-7 hover:border-primary/40 hover:shadow-elegant transition-all duration-300 flex flex-col"
               >
-                <span className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  <s.icon className="h-5 w-5" />
-                </span>
+                <div className="flex items-start justify-between">
+                  <span className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <s.icon className="h-5 w-5" />
+                  </span>
+                  <span className="font-serif text-2xl text-primary/15 leading-none tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
                 <h3 className="mt-5 font-serif text-xl text-foreground">
                   {s.title}
                 </h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed flex-1">
                   {s.text}
                 </p>
+                <Link
+                  to="/leistungen"
+                  className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:gap-2.5 transition-all self-start opacity-0 group-hover:opacity-100"
+                >
+                  Mehr erfahren <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </article>
             ))}
+          </div>
+
+          <div className="mt-8 text-center md:hidden">
+            <Link
+              to="/leistungen"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
+            >
+              Alle Leistungen <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -262,8 +335,8 @@ function HomePage() {
                   "Hol- und Bringservice in der Region auf Anfrage",
                 ].map((p) => (
                   <li key={p} className="flex items-start gap-3 text-sm">
-                    <ShieldCheck className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                    <span className="text-foreground/80">{p}</span>
+                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                    <span className="text-foreground/85">{p}</span>
                   </li>
                 ))}
               </ul>
@@ -280,20 +353,72 @@ function HomePage() {
         </div>
       </section>
 
-      {/* REIFENSERVICE */}
+      {/* ABLAUF — So arbeiten wir */}
       <section className="py-20 md:py-28">
+        <div className="container-tight">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-primary font-semibold">
+              <Sparkles className="h-3 w-3" />
+              So arbeiten wir
+            </p>
+            <h2 className="mt-4 font-serif text-3xl md:text-5xl text-balance leading-[1.05]">
+              Vom ersten Anruf bis zur Übergabe — transparent.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Keine Überraschungen, keine versteckten Kosten. Sie wissen jederzeit,
+              woran Sie bei uns sind.
+            </p>
+          </div>
+
+          <ol className="mt-14 grid md:grid-cols-3 lg:grid-cols-5 gap-5 relative">
+            {/* dezente Verbindungslinie auf großen Screens */}
+            <div className="hidden lg:block absolute top-7 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-border to-transparent" aria-hidden />
+            {ABLAUF.map((a) => (
+              <li
+                key={a.step}
+                className="relative rounded-2xl bg-card border border-border p-5 hover:border-primary/30 hover:shadow-warm transition-all"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-primary text-primary-foreground shadow-warm">
+                    <a.icon className="h-5 w-5" />
+                  </span>
+                  <span className="font-serif text-2xl text-primary/20 leading-none tabular-nums">
+                    {a.step}
+                  </span>
+                </div>
+                <p className="mt-4 font-serif text-base">{a.t}</p>
+                <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{a.d}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* REIFENSERVICE */}
+      <section className="py-20 md:py-28 bg-cream/50 border-y border-border">
         <div className="container-tight">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="lg:order-2">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-elegant">
-                <img
-                  src={reifenImg}
-                  alt="Reifenhotel und Reifenservice"
-                  width={1280}
-                  height={960}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+              <div className="relative">
+                <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-elegant border border-border">
+                  <img
+                    src={reifenImg}
+                    alt="Reifenhotel und Reifenservice"
+                    width={1280}
+                    height={960}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="hidden md:flex absolute -bottom-6 -left-6 items-center gap-3 rounded-2xl bg-card border border-border p-4 shadow-warm">
+                  <span className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-primary/10 text-primary shrink-0">
+                    <CircleDot className="h-5 w-5" />
+                  </span>
+                  <div className="text-xs leading-snug">
+                    <p className="font-semibold text-foreground">Reifenhotel</p>
+                    <p className="text-muted-foreground">Sicher · trocken · überwacht</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="lg:order-1">
@@ -302,23 +427,26 @@ function HomePage() {
                 title="Reifenwechsel & Einlagerung — bequem wie ein Hotel."
                 subtitle="Wir wechseln, wuchten und lagern Ihre Räder fachgerecht ein. Im Frühjahr und Herbst stehen sie pünktlich für Sie bereit — mit ausführlicher Profil- und Druckkontrolle."
               />
-              <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              <div className="mt-8 grid sm:grid-cols-2 gap-3">
                 {[
                   { t: "Reifenwechsel & Auswuchten", d: "Termin meist innerhalb weniger Tage" },
                   { t: "Reifenhotel", d: "Sicher und sauber bei uns eingelagert" },
                   { t: "Beratung & Verkauf", d: "Markenreifen passend zu Ihrem Fahrzeug" },
                   { t: "Saison-Erinnerung", d: "Wir melden uns zur richtigen Zeit" },
                 ].map((b) => (
-                  <div key={b.t} className="rounded-xl bg-card border border-border p-4">
-                    <p className="font-medium text-foreground">{b.t}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{b.d}</p>
+                  <div
+                    key={b.t}
+                    className="rounded-xl bg-card border border-border p-4 hover:border-primary/30 transition-colors"
+                  >
+                    <p className="font-medium text-foreground text-sm">{b.t}</p>
+                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{b.d}</p>
                   </div>
                 ))}
               </div>
               <div className="mt-8">
                 <Link
                   to="/reifenservice"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary-hover transition-colors shadow-warm"
                 >
                   Zum Reifenservice <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -346,13 +474,14 @@ function HomePage() {
               <GoogleRatingBadge variant="dark" />
             </div>
           </div>
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <div className="mt-12 grid md:grid-cols-3 gap-5">
             {HOME_REVIEWS.map((r) => (
               <figure
                 key={r.author}
-                className="rounded-2xl bg-background/5 border border-background/10 p-7 backdrop-blur flex flex-col"
+                className="relative rounded-2xl bg-background/[0.04] border border-background/10 p-7 backdrop-blur flex flex-col hover:bg-background/[0.07] transition-colors"
               >
-                <div className="flex gap-0.5 text-gold">
+                <Quote className="absolute top-5 right-5 h-8 w-8 text-gold/20" />
+                <div className="flex gap-0.5 text-gold relative">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
@@ -360,12 +489,17 @@ function HomePage() {
                     />
                   ))}
                 </div>
-                <blockquote className="mt-4 text-background/90 leading-relaxed flex-1">
-                  „{r.text}"
+                <blockquote className="mt-4 text-background/90 leading-relaxed flex-1 text-[0.95rem]">
+                  „{truncate(r.text, 220)}"
                 </blockquote>
-                <figcaption className="mt-5 text-sm">
-                  <span className="font-medium text-background">{r.author}</span>
-                  <span className="text-background/60"> · {r.date}</span>
+                <figcaption className="mt-5 flex items-center gap-3 text-sm border-t border-background/10 pt-4">
+                  <span className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-gold/15 text-gold font-serif font-semibold text-xs">
+                    {r.initials}
+                  </span>
+                  <div className="leading-tight">
+                    <p className="font-medium text-background">{r.author}</p>
+                    <p className="text-background/60 text-xs">{r.date}</p>
+                  </div>
                 </figcaption>
               </figure>
             ))}
@@ -381,8 +515,34 @@ function HomePage() {
         </div>
       </section>
 
-      {/* STANDORT */}
+      {/* GALERIE — Bento-Layout */}
       <section className="py-20 md:py-28">
+        <div className="container-tight">
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="text-xs uppercase tracking-[0.22em] text-primary font-medium">
+              Einblicke
+            </p>
+            <h2 className="mt-3 font-serif text-3xl md:text-5xl text-balance leading-[1.05]">
+              Ein Blick in unsere Werkstatt.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Modernes Equipment, viel Platz und ein eingespieltes Team — so
+              sieht Werkstatt heute aus.
+            </p>
+          </div>
+
+          {/* Bento: 1 großes Bild + 3 kleinere */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-3 md:gap-4 md:h-[520px]">
+            <BentoImg src={gallery1} alt="Eindruck aus dem Autoservice Beuerberg 1" className="md:col-span-2 md:row-span-2" />
+            <BentoImg src={gallery2} alt="Eindruck aus dem Autoservice Beuerberg 2" />
+            <BentoImg src={gallery3} alt="Eindruck aus dem Autoservice Beuerberg 3" />
+            <BentoImg src={gallery4} alt="Eindruck aus dem Autoservice Beuerberg 4" className="md:col-span-2" />
+          </div>
+        </div>
+      </section>
+
+      {/* STANDORT */}
+      <section className="py-20 md:py-28 bg-cream/50 border-y border-border">
         <div className="container-tight">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -391,86 +551,42 @@ function HomePage() {
                 title="Direkt an der Bahnhofstraße in Beuerberg."
                 subtitle="Gut erreichbar aus Wolfratshausen, Bad Tölz, Tegernsee und dem gesamten Landkreis. Parkplätze direkt vor der Tür."
               />
-              <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border">
-                  <span className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary shrink-0">
-                    <MapPin className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="font-medium">Adresse</p>
-                    <p className="text-sm text-muted-foreground mt-0.5">
-                      {SITE.street}, {SITE.zip} {SITE.city}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border">
-                  <span className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary shrink-0">
+              <div className="mt-8 space-y-3">
+                <InfoRow icon={MapPin} title="Adresse" body={`${SITE.street}, ${SITE.zip} ${SITE.city}`} />
+                <div className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border">
+                  <span className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-primary/10 text-primary shrink-0">
                     <Clock className="h-5 w-5" />
                   </span>
                   <div className="flex-1">
                     <p className="font-medium">Öffnungszeiten</p>
-                    <ul className="mt-1 text-sm text-muted-foreground space-y-0.5">
+                    <ul className="mt-2 text-sm space-y-0.5">
                       {SITE.hours.map((h) => (
                         <li key={h.day} className="flex justify-between gap-3">
-                          <span>{h.day}</span>
-                          <span>{h.time}</span>
+                          <span className="text-foreground/80">{h.day}</span>
+                          <span className="text-muted-foreground tabular-nums">{h.time}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-card border border-border">
-                  <span className="inline-flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary shrink-0">
-                    <Phone className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="font-medium">Direkt anrufen</p>
+                <InfoRow
+                  icon={Phone}
+                  title="Direkt anrufen"
+                  body={
                     <a
                       href={`tel:${SITE.phoneIntl}`}
-                      className="text-sm text-primary hover:underline"
+                      className="text-primary hover:underline font-medium"
                     >
                       {SITE.phone}
                     </a>
-                  </div>
-                </div>
+                  }
+                />
               </div>
             </div>
             <MapEmbed className="aspect-[4/3] lg:aspect-square shadow-elegant" />
           </div>
         </div>
       </section>
-
-      {/* GALERIE — echte Werkstattfotos */}
-      <section className="pb-20 md:pb-28">
-        <div className="container-tight">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-xs uppercase tracking-[0.22em] text-primary font-medium">
-              Einblicke
-            </p>
-            <h2 className="mt-3 font-serif text-3xl md:text-4xl text-balance">
-              Ein Blick in unsere Werkstatt.
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              Modernes Equipment, viel Platz und ein eingespieltes Team — so
-              sieht Werkstatt heute aus.
-            </p>
-          </div>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-            {[gallery1, gallery2, gallery3, gallery4].map((src, i) => (
-              <div key={i} className="aspect-square rounded-2xl overflow-hidden bg-cream border border-border">
-                <img
-                  src={src}
-                  alt={`Eindruck aus dem Autoservice Beuerberg ${i + 1}`}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
 
       {/* CTA */}
       <section className="relative py-20 md:py-28 overflow-hidden">
@@ -486,29 +602,71 @@ function HomePage() {
           aria-hidden
         />
         <div className="container-tight relative text-center text-primary-foreground">
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-balance max-w-2xl mx-auto">
+          <p className="text-xs uppercase tracking-[0.28em] font-semibold opacity-90">
+            Termin sichern
+          </p>
+          <h2 className="mt-3 font-serif text-3xl sm:text-4xl md:text-5xl text-balance max-w-2xl mx-auto">
             Bereit für Ihren Termin? Ein Anruf genügt.
           </h2>
-          <p className="mt-4 text-primary-foreground/85 max-w-xl mx-auto">
+          <p className="mt-5 text-primary-foreground/85 max-w-xl mx-auto leading-relaxed">
             Persönlich Mo–Fr 8–17 Uhr — außerhalb nimmt unser Telefonassistent
             <strong className="text-primary-foreground"> rund um die Uhr</strong> Ihre Terminwünsche entgegen.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href={`tel:${SITE.phoneIntl}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-background text-foreground px-6 py-3.5 text-sm font-semibold hover:bg-background/90 transition-colors shadow-warm"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background text-foreground px-7 py-4 text-sm font-semibold hover:bg-cream transition-colors shadow-warm"
             >
               <Phone className="h-4 w-4" /> {SITE.phone}
             </a>
             <Link
               to="/kontakt"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-background/40 bg-background/10 backdrop-blur px-6 py-3.5 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-background/40 bg-background/10 backdrop-blur px-7 py-4 text-sm font-semibold text-background hover:bg-background/20 transition-colors"
             >
               Schriftlich kontaktieren
+              <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
     </div>
   );
+}
+
+function BentoImg({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
+  return (
+    <div className={`group relative aspect-square md:aspect-auto rounded-2xl overflow-hidden bg-cream border border-border ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+      />
+    </div>
+  );
+}
+
+function InfoRow({
+  icon: Icon, title, body,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  body: React.ReactNode;
+}) {
+  return (
+    <div className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border">
+      <span className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-primary/10 text-primary shrink-0">
+        <Icon className="h-5 w-5" />
+      </span>
+      <div className="flex-1 text-sm">
+        <p className="font-medium">{title}</p>
+        <div className="mt-0.5 text-muted-foreground">{body}</div>
+      </div>
+    </div>
+  );
+}
+
+function truncate(s: string, n: number) {
+  if (s.length <= n) return s;
+  return s.slice(0, n).trimEnd() + "…";
 }
