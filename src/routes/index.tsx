@@ -463,9 +463,8 @@ function HomePage() {
           </div>
         </div>
       </section>
-          </div>
-        </div>
-      </section>
+
+
 
       {/* CTA */}
       <section className="relative py-20 md:py-28 overflow-hidden">
