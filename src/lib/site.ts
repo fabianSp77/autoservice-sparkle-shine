@@ -28,11 +28,15 @@ export const SITE = {
   registerNumber: "HRB 177787",
   mapsEmbed:
     "https://www.google.com/maps?q=Autoservice+Beuerberg+GmbH,+Bahnhofstra%C3%9Fe+45,+82547+Eurasburg&output=embed",
+  // Standardisierte Google-Maps-Suche nach Name + Adresse — landet zuverlässig
+  // auf dem Brancheneintrag mit Bewertungs-Tab, ohne auf eine geratene
+  // Place-ID angewiesen zu sein.
   mapsLink:
-    "https://www.google.com/maps/place/?q=place_id:ChIJZahmrqe4nUcR54emC0uv9SQ",
-  googlePlaceId: "ChIJZahmrqe4nUcR54emC0uv9SQ",
+    "https://www.google.com/maps/search/?api=1&query=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg",
+  // "Bewertung schreiben" über die offizielle Google-Suche — funktioniert
+  // ohne Place-ID, indem es den Eintrag namentlich auflöst.
   googleReviewLink:
-    "https://search.google.com/local/writereview?placeid=ChIJZahmrqe4nUcR54emC0uv9SQ",
+    "https://www.google.com/search?q=Autoservice+Beuerberg+GmbH+Bahnhofstra%C3%9Fe+45+82547+Eurasburg#lrd=,1,,,,",
   facebookUrl: "https://www.facebook.com/AutoserviceBeuerberg/",
   facebookHandle: "AutoserviceBeuerberg",
 } as const;
