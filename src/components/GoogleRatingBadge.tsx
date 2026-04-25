@@ -44,7 +44,7 @@ export function GoogleRatingBadge({ variant = "default", className = "" }: Props
       <Link
         to="/bewertungen"
         className={`inline-flex items-center gap-3 rounded-full bg-background/10 backdrop-blur border border-background/20 hover:bg-background/15 px-4 py-2 transition-all group ${className}`}
-        aria-label={`${REVIEWS_SUMMARY.rating.toFixed(1)} von 5 Sternen auf Google – ${REVIEWS_SUMMARY.count} Bewertungen`}
+        aria-label={`${REVIEWS_SUMMARY.rating.toFixed(1)} von 5 Sternen auf Google`}
       >
         <GoogleG className="h-4 w-4" />
         <span className="text-sm font-semibold text-background tabular-nums">
@@ -59,7 +59,7 @@ export function GoogleRatingBadge({ variant = "default", className = "" }: Props
           ))}
         </span>
         <span className="text-xs text-background/75 hidden sm:inline">
-          {REVIEWS_SUMMARY.count} Google-Bewertungen
+          auf Google
         </span>
       </Link>
     );
