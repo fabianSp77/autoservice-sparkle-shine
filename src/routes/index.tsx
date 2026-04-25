@@ -370,7 +370,7 @@ function HomePage() {
               to="/bewertungen"
               className="inline-flex items-center gap-2 text-sm font-semibold text-gold hover:gap-3 transition-all"
             >
-              Alle {REVIEWS_SUMMARY.count}+ Bewertungen lesen <ArrowRight className="h-4 w-4" />
+              Alle {REVIEWS_SUMMARY.count} Bewertungen auf Google ansehen <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
