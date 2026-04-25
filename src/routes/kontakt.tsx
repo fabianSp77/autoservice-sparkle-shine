@@ -69,6 +69,7 @@ type FormState = {
   services: string[];
   message: string;
   consent: boolean;
+  website: string; // Honeypot — muss leer bleiben
 };
 
 const INITIAL: FormState = {
@@ -76,6 +77,7 @@ const INITIAL: FormState = {
   name: "", phone: "", email: "", vehicle: "",
   services: [],
   message: "", consent: false,
+  website: "",
 };
 
 export const Route = createFileRoute("/kontakt")({
@@ -241,7 +243,7 @@ function ContactPage() {
               <form
                 onSubmit={onSubmit}
                 noValidate
-                className="rounded-3xl bg-card border border-border p-6 sm:p-8 shadow-soft"
+                className="relative rounded-3xl bg-card border border-border p-6 sm:p-8 shadow-soft"
               >
                 <h2 className="font-serif text-2xl">Schreiben Sie uns</h2>
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -295,6 +297,8 @@ function ContactPage() {
                       onChange={(e) => set("name", e.target.value)}
                       placeholder="Max Mustermann"
                       autoComplete="name"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
                   <Field label="Telefon (optional)" error={errors.phone} id="phone">
@@ -305,6 +309,9 @@ function ContactPage() {
                       placeholder="0151 12345678"
                       type="tel"
                       autoComplete="tel"
+                      inputMode="tel"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
                   <Field label="E-Mail *" error={errors.email} id="email" className="sm:col-span-2">
@@ -315,6 +322,9 @@ function ContactPage() {
                       placeholder="ihre@email.de"
                       type="email"
                       autoComplete="email"
+                      inputMode="email"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
                   <Field
@@ -328,8 +338,25 @@ function ContactPage() {
                       value={form.vehicle}
                       onChange={(e) => set("vehicle", e.target.value)}
                       placeholder="z. B. VW Golf VII, 2018"
+                      autoComplete="off"
+                      enterKeyHint="next"
+                      className="h-12 text-base"
                     />
                   </Field>
+                </div>
+
+                {/* Honeypot — visuell verborgen, von Bots aber befüllt */}
+                <div aria-hidden="true" className="absolute left-[-9999px] w-px h-px overflow-hidden">
+                  <label htmlFor="website-hp">Website (bitte freilassen)</label>
+                  <input
+                    id="website-hp"
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={(e) => set("website", e.target.value)}
+                  />
                 </div>
 
                 {/* Leistungen — nur bei "services" */}
@@ -385,18 +412,20 @@ function ContactPage() {
                       }
                       rows={5}
                       maxLength={1500}
+                      enterKeyHint="enter"
+                      className="text-base min-h-[140px]"
                     />
                   </Field>
                 </div>
 
-                <label className="mt-6 flex items-start gap-3 text-sm">
+                <label className="mt-6 flex items-start gap-3 text-sm cursor-pointer">
                   <input
                     type="checkbox"
                     checked={form.consent}
                     onChange={(e) => set("consent", e.target.checked)}
-                    className="mt-1 h-4 w-4 rounded border-border accent-primary"
+                    className="mt-1 h-5 w-5 rounded border-border accent-primary shrink-0"
                   />
-                  <span className="text-muted-foreground">
+                  <span className="text-muted-foreground leading-relaxed">
                     Ich bin damit einverstanden, dass meine Angaben zur
                     Bearbeitung der Anfrage verwendet werden. *
                   </span>
@@ -409,7 +438,7 @@ function ContactPage() {
                   type="submit"
                   size="lg"
                   disabled={submitting}
-                  className="mt-6 w-full sm:w-auto rounded-full px-8"
+                  className="mt-6 w-full sm:w-auto rounded-full px-8 h-12 text-base"
                 >
                   {submitting ? (
                     <>

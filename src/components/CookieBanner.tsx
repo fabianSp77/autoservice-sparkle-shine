@@ -37,7 +37,7 @@ export function CookieBanner() {
   };
 
   return (
-    <div className="fixed inset-x-3 bottom-3 z-50 sm:inset-x-auto sm:right-4 sm:bottom-4 sm:max-w-md">
+    <div className="fixed inset-x-3 bottom-[88px] z-50 lg:bottom-4 sm:inset-x-auto sm:right-4 sm:max-w-md" style={{ marginBottom: "env(safe-area-inset-bottom)" }}>
       <div className="rounded-2xl bg-foreground text-background shadow-elegant border border-background/10 p-5">
         <p className="font-serif text-base">Cookies & Einbettungen</p>
         <p className="mt-2 text-sm text-background/75 leading-relaxed">

@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieBanner } from "@/components/CookieBanner";
+import { MobileActionBar } from "@/components/MobileActionBar";
 import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
@@ -83,10 +84,11 @@ function RootComponent() {
   return (
     <>
       <SiteHeader />
-      <main className="min-h-screen">
+      <main className="min-h-screen pb-[76px] lg:pb-0">
         <Outlet />
       </main>
       <SiteFooter />
+      <MobileActionBar />
       <CookieBanner />
       <Toaster richColors position="top-center" />
     </>
