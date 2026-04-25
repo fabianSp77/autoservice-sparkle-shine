@@ -1,66 +1,49 @@
-## Recherche-Ergebnisse (verifiziert)
+# Planungsdokumente für die Website neu erstellen
 
-**Firmendaten (aus Gelbe Seiten, Das Örtliche, Das Gelbe Blatt):**
-- Name: Autoservice Beuerberg GmbH
-- Inhaber: Jürgen & Monika Fischer (Familienunternehmen, Sohn Ludwig im Betrieb)
-- Gegründet: 2009 (Neubau begann 2008, viel Eigenleistung)
-- Adresse: Bahnhofstr. 45, 82547 Eurasburg-Beuerberg
-- Telefon: 08179 92 92 44
-- Öffnungszeiten: Mo–Fr 08:00–17:00 (Sa/So geschlossen — laut Gelbe Seiten)
-- Fotos: 17 Originalbilder verfügbar bei dasgelbeblatt.de (`assets/images/28/487/28487*-autoservice-beuerberg-*.jpg`)
+Ich lege im neuen Ordner `docs/` 11 Markdown-Dateien an, die den vollständigen aktuellen Stand der Website abbilden — vom Projekt-Überblick über Architektur und Sicherheit bis zur Roadmap. Diese Dokumente sind die zentrale Referenz für alle weiteren Iterationen.
 
-**Google-Bewertungen:** Direktes Scraping ist nicht zuverlässig möglich (Google rendert clientseitig, blockiert Bots). Echte Bewertungen lassen sich nur über die **Google Places API** holen — dafür braucht es einen Google Maps Platform API Key vom Inhaber.
+## Welche Dateien entstehen
 
-**Facebook:** Profil existiert, aber Facebook blockiert Scraping. Wir können aber das offizielle **Facebook Page Plugin** als iFrame einbetten (zeigt automatisch die letzten Posts) — funktioniert nur mit der echten Page-URL des Inhabers.
+```text
+docs/
+├── README.md                    Inhaltsverzeichnis aller Doku-Dateien
+├── 01-overview.md               Projektüberblick, Geschäftsdaten, Ziele, Zielgruppen, USP
+├── 02-architecture.md           Tech-Stack, Verzeichnisstruktur, Daten-Flow, Architektur-Entscheidungen
+├── 03-content-structure.md      Sitemap, Inhalt jeder Route, Konsistenz-Regeln
+├── 04-design-system.md          Farb-Tokens, Typografie, Komponenten-Inventar, UI-Patterns
+├── 05-backend-database.md       Tabellen-Schemas, RLS-Policies, API-Endpoint /api/booking
+├── 06-security.md               Security-Headers, CSP, Honeypot, Rate-Limiting, DSGVO
+├── 07-mobile-accessibility.md   MobileActionBar, Touch-Targets, WCAG-Status
+├── 08-seo-meta.md               Per-Route Meta, geplantes Schema.org, lokale SEO-Signale
+├── 09-deployment.md             Publishing-Workflow, Custom-Domain-Setup, Env-Vars
+└── 10-roadmap.md                Offene Punkte (E-Mail-Notification, Schema.org, Admin-Dashboard …)
+```
 
----
+## Was die Dokumente abbilden
 
-## Plan: Was umgesetzt wird
+**Aktueller Bestand** wird vollständig dokumentiert:
+- 7 öffentliche Routen + 1 API-Route (`/api/booking`)
+- Datenbank: `booking_requests` + `rate_limits` mit Deny-RLS
+- Security: 6 Response-Header global via `src/start.ts`, vollständige CSP
+- Anti-Spam: Honeypot-Feld + IP-Rate-Limit (5 / 10 Min)
+- Mobile: Sticky-Action-Bar, 48 px Touch-Targets, iOS-Zoom-Prevention
+- Single Source of Truth: `src/lib/site.ts` für Adresse/Telefon/Maps-Links
+- Verifizierte Daten: Google-Place-ID, echte Reviews, Handelsregister
 
-### 1. Verifizierte Stammdaten in `src/lib/site.ts` aktualisieren
-- Öffnungszeiten korrigieren auf **Mo–Fr 08:00–17:00** (Sa/So geschlossen)
-- Telefonnummer bestätigen: `08179 929244`
-- Inhaber & Gründungsjahr bestätigt im About-Bereich
+**Roadmap** listet sinnvolle nächste Schritte:
+- E-Mail-Benachrichtigung bei neuem Booking (Resend)
+- Schema.org-LocalBusiness-JSON-LD für Google-Knowledge-Panel
+- sitemap.xml + robots.txt
+- Per-Route og:image für besseres Social-Sharing
+- Skip-to-Content-Link für Tastatur-Navigation
+- Mittelfristig: Admin-Dashboard, Reifeneinlagerungs-Verwaltung, CSP-Härtung
 
-### 2. Echte Werkstatt-Fotos einbauen (statt KI-generierter Bilder)
-- 6–8 der 17 Originalbilder von dasgelbeblatt.de via Build-Skript herunterladen
-- Lokal in `src/assets/real/` ablegen (lizenzrechtlicher Hinweis: Bilder sind © Autoservice Beuerberg laut Quelle)
-- Hero-, Werkstatt- und Service-Bilder ersetzen
-- Galerie-Sektion auf Startseite + `/ueber-uns` mit echten Bildern
+**Wartungs-Checkliste** für laufende Pflege (Reviews aktualisieren, Öffnungszeiten prüfen).
 
-### 3. Echte Google-Bewertungen via Places API
-- Edge Route `/api/reviews` (server function) holt Reviews via Google Places API (`place_id` ist bekannt: `ChIJZahmrqe4nUcR54emC0uv9SQ`)
-- Caching: 24h serverseitig im Memory + via TanStack Query auf Client
-- Fallback-UI wenn API-Key fehlt: Hinweis + Link zum Google-Profil
-- **Wir benötigen vom Inhaber einen `GOOGLE_MAPS_API_KEY` mit aktivierter Places API** — wird via `add_secret` angefragt, sobald der Plan genehmigt ist
-- Anzeige: Sterne-Schnitt, Anzahl, 3–5 jüngste Reviews mit Autor, Datum, Text auf `/bewertungen` + Teaser auf Startseite
-- "Bewertung schreiben"-Button verlinkt direkt auf das Google-Bewertungsformular
+## Format
 
-### 4. Facebook-Integration
-- Footer + Header: Facebook-Icon-Link zur Page
-- `/bewertungen` (oder neuer Bereich auf Startseite): **Facebook Page Plugin** als iFrame eingebettet, zeigt die letzten Posts in einem schmalen Widget (300×500px)
-- **Wir benötigen die exakte Facebook-Page-URL** — Inhaber muss bestätigen (z.B. `facebook.com/AutoserviceBeuerberg`); wird per `ask_questions` nachgefragt
+Alle Dateien in deutschem Markdown, mit Tabellen für strukturierte Daten, Code-Blöcken für SQL/Config-Beispiele und ASCII-Diagrammen wo sinnvoll. Jede Datei für sich lesbar (kein Pflicht-Reihenfolge), aber das `README.md` dient als Einstieg.
 
-### 5. Impressum + Datenschutz (Pflicht in DE)
-- `/impressum` mit echten Daten (Geschäftsführer, HRB falls bekannt, USt-ID Platzhalter)
-- `/datenschutz` mit Hinweisen zu Google Maps, Google Reviews API, Facebook-Embed (Cookies)
+## Was sich nicht ändert
 
-### 6. Cookie-Hinweis
-- Da Facebook-Embed und Google Maps Tracker setzen, dezenter Consent-Banner (eigene minimale Lösung, keine Zusatz-Library)
-
----
-
-## Was wir vom Inhaber brauchen (nach Plan-Genehmigung)
-
-1. **Facebook-Page-URL** bestätigen
-2. **Google Maps API Key** (mit Places API enabled) — Anleitung wird mitgeliefert
-3. Optional: Eigene Logo-Datei
-4. Optional: Höher aufgelöste Original-Bilder (sonst nehmen wir die aus dem Presseartikel)
-
-## Technische Details
-
-- Bilder-Download als einmaliges Build-Skript (`scripts/fetch-images.ts`), Bilder werden als statische Assets eingecheckt
-- Google Places API call: `https://maps.googleapis.com/maps/api/place/details/json?place_id=...&fields=reviews,rating,user_ratings_total&key=...`
-- Cache-Layer: serverseitiger In-Memory-Cache mit 24h TTL (Places API Pricing schonen)
-- Facebook Plugin: `https://www.facebook.com/plugins/page.php` iframe, kein API-Key nötig
-- Cookie-Consent-State in `localStorage`, Embeds erst nach Zustimmung geladen
+Keine Code-Änderungen am App-Code — reine Dokumentations-Erstellung. Die Dokumente liegen im `docs/`-Ordner und werden nicht im Build/Deployment der Website ausgeliefert.
