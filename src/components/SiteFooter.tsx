@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 export function SiteFooter() {
@@ -22,6 +22,26 @@ export function SiteFooter() {
             Ihr Familienbetrieb für Service, Reparatur und Reifen im Herzen
             des bayerischen Voralpenlands.
           </p>
+          <div className="mt-5 flex items-center gap-2">
+            <a
+              href={SITE.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Autoservice Beuerberg auf Facebook"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/10 hover:bg-[#1877F2] hover:text-white text-background/80 transition-colors"
+            >
+              <Facebook className="h-4 w-4" />
+            </a>
+            <a
+              href={SITE.mapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Auf Google Maps öffnen"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-background/10 hover:bg-gold hover:text-foreground text-background/80 transition-colors"
+            >
+              <MapPin className="h-4 w-4" />
+            </a>
+          </div>
         </div>
 
         <div>
@@ -57,7 +77,7 @@ export function SiteFooter() {
             Öffnungszeiten
           </h4>
           <ul className="mt-4 space-y-2 text-sm">
-            {SITE.hours.map((h) => (
+            {SITE.hoursShort.map((h) => (
               <li key={h.day} className="flex items-center justify-between gap-3 max-w-[14rem]">
                 <span className="flex items-center gap-2">
                   <Clock className="h-3.5 w-3.5 text-gold/70" />
@@ -67,6 +87,9 @@ export function SiteFooter() {
               </li>
             ))}
           </ul>
+          <p className="mt-3 text-xs text-background/50 max-w-[14rem]">
+            Termine außerhalb der Öffnungszeiten nach Absprache möglich.
+          </p>
         </div>
 
         <div>
@@ -87,8 +110,8 @@ export function SiteFooter() {
         <div className="container-tight py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-background/55">
           <p>© {new Date().getFullYear()} {SITE.legalName} · Alle Rechte vorbehalten</p>
           <p className="flex items-center gap-4">
-            <span className="opacity-70">Impressum</span>
-            <span className="opacity-70">Datenschutz</span>
+            <Link to="/impressum" className="hover:text-gold transition-colors">Impressum</Link>
+            <Link to="/datenschutz" className="hover:text-gold transition-colors">Datenschutz</Link>
           </p>
         </div>
       </div>
