@@ -65,7 +65,7 @@ function RatingHeader() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground">
-            aus {REVIEWS_SUMMARY.count} verifizierten Bewertungen
+            aus {REVIEWS_SUMMARY.count} Google-Bewertungen
           </p>
         </div>
       </div>
