@@ -88,8 +88,9 @@ export const GOOGLE_REVIEWS: StaticReview[] = [
   },
 ];
 
-// Aggregat — basierend auf den 7 verifizierten 5-Sterne-Bewertungen
+// Aggregat — verifiziert direkt vom Google-Profil (Stand: 2026-04)
+// Quelle: Google Search/Maps öffentliches Profil
 export const REVIEWS_SUMMARY = {
-  rating: 5.0,
-  count: GOOGLE_REVIEWS.length,
+  rating: 4.6,
+  count: 56,
 };
