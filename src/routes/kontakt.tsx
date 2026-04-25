@@ -81,7 +81,7 @@ const INITIAL: FormState = {
 };
 
 export const Route = createFileRoute("/kontakt")({
-  validateSearch: (s: Record<string, unknown>) => ({
+  validateSearch: (s: Record<string, unknown>): { leistung?: string } => ({
     leistung: typeof s.leistung === "string" ? s.leistung : undefined,
   }),
   head: () => ({
