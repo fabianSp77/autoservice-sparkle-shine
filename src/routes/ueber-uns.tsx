@@ -143,8 +143,8 @@ function AboutPage() {
         <div className="container-tight grid md:grid-cols-2 gap-6">
           <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-warm">
             <img
-              src={serviceImg}
-              alt="Detail aus unserer Werkstatt"
+              src={technikImg}
+              alt="Bosch-Achsmessung in unserer Werkstatt"
               width={1280}
               height={960}
               loading="lazy"
