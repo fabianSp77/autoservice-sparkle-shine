@@ -464,7 +464,7 @@ function ContactPage() {
           <aside className="space-y-4">
             <ContactCard icon={PhoneCall} title="Telefonisch erreichbar" body={
               <p className="text-xs text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Mo–Fr 8–17 Uhr</span>{" "}
+                <span className="text-foreground font-medium">Mo–Do 7:30–18 · Fr bis 12 Uhr</span>{" "}
                 persönlich · außerhalb übernimmt unser Telefonassistent
                 rund um die Uhr.
               </p>
