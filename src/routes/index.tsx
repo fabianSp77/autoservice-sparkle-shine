@@ -11,7 +11,7 @@ import { MapEmbed } from "@/components/MapEmbed";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { GOOGLE_REVIEWS, REVIEWS_SUMMARY } from "@/lib/reviews";
 import heroImg from "@/assets/real/header-gebaeude.jpg";
-import teamImg from "@/assets/real/foto-02.jpg";
+import teamImg from "@/assets/real/team-gruppe.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
 import detailImg from "@/assets/real/foto-04.jpg";
 import gallery1 from "@/assets/real/foto-03.jpg";
@@ -305,12 +305,12 @@ function HomePage() {
         <div className="container-tight">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="relative">
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elegant">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-elegant">
                 <img
                   src={teamImg}
-                  alt="Familie Fischer — das Team von Autoservice Beuerberg"
-                  width={1024}
-                  height={1280}
+                  alt="Das Team von Autoservice Beuerberg vor der Werkstatt"
+                  width={1440}
+                  height={1080}
                   loading="lazy"
                   className="h-full w-full object-cover"
                 />
