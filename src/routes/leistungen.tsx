@@ -264,7 +264,7 @@ function LeistungenPage() {
                 Sprechen Sie uns einfach an.
               </h2>
               <p className="mt-4 text-primary-foreground/85 text-base md:text-lg">
-                Mo–Fr 8–17 Uhr persönlich, außerhalb 24/7 über unseren
+                Mo–Do 7:30–12 & 13–18 Uhr, Fr 7:30–12 Uhr persönlich, außerhalb 24/7 über unseren
                 Telefonassistenten — wir helfen weiter oder vermitteln Sie an
                 unsere Partner.
               </p>

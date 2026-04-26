@@ -90,7 +90,7 @@ export const Route = createFileRoute("/kontakt")({
       {
         name: "description",
         content:
-          "Telefonisch rund um die Uhr erreichbar: 08179 929244. Persönlich Mo–Fr 8–17 Uhr, außerhalb über unseren Telefonassistenten. Oder schreiben Sie uns eine Nachricht.",
+          "Telefonisch rund um die Uhr erreichbar: 08179 929244. Persönlich Mo–Do 7:30–12 & 13–18 Uhr, Fr 7:30–12 Uhr, außerhalb über unseren Telefonassistenten. Oder schreiben Sie uns eine Nachricht.",
       },
       { property: "og:title", content: "Kontakt — Autoservice Beuerberg" },
       {
@@ -167,7 +167,7 @@ function ContactPage() {
       <PageHero
         eyebrow="Kontakt"
         title="Am schnellsten erreichen Sie uns telefonisch."
-        subtitle="Persönlich Mo–Fr von 8 bis 17 Uhr — außerhalb der Öffnungszeiten nimmt unser Telefonassistent rund um die Uhr Ihre Anliegen entgegen."
+        subtitle="Persönlich Mo–Do 7:30–12 und 13–18 Uhr, Fr 7:30–12 Uhr — außerhalb der Öffnungszeiten nimmt unser Telefonassistent rund um die Uhr Ihre Anliegen entgegen."
         breadcrumbs={[{ label: "Kontakt" }]}
         showTrustStrip={false}
       />
@@ -193,7 +193,7 @@ function ContactPage() {
               <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
                 <li className="flex items-center gap-2 text-foreground/80">
                   <Users className="h-4 w-4 text-primary shrink-0" />
-                  Mo–Fr 8–17 Uhr persönlich
+                  Mo–Do 7:30–18 · Fr bis 12 Uhr
                 </li>
                 <li className="flex items-center gap-2 text-foreground/80">
                   <Headphones className="h-4 w-4 text-primary shrink-0" />
@@ -464,7 +464,7 @@ function ContactPage() {
           <aside className="space-y-4">
             <ContactCard icon={PhoneCall} title="Telefonisch erreichbar" body={
               <p className="text-xs text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Mo–Fr 8–17 Uhr</span>{" "}
+                <span className="text-foreground font-medium">Mo–Do 7:30–18 · Fr bis 12 Uhr</span>{" "}
                 persönlich · außerhalb übernimmt unser Telefonassistent
                 rund um die Uhr.
               </p>

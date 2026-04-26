@@ -609,7 +609,7 @@ function HomePage() {
             Bereit für Ihren Termin? Ein Anruf genügt.
           </h2>
           <p className="mt-5 text-primary-foreground/85 max-w-xl mx-auto leading-relaxed">
-            Persönlich Mo–Fr 8–17 Uhr — außerhalb nimmt unser Telefonassistent
+            Persönlich Mo–Do 7:30–12 & 13–18 Uhr, Fr 7:30–12 Uhr — außerhalb nimmt unser Telefonassistent
             <strong className="text-primary-foreground"> rund um die Uhr</strong> Ihre Terminwünsche entgegen.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
