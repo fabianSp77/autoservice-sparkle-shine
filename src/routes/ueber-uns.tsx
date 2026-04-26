@@ -68,8 +68,8 @@ function AboutPage() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elegant">
               <img
-                src={teamImg}
-                alt="Familie Fischer mit ihrem Team"
+                src={familieImg}
+                alt="Monika Fischer im Büro — persönlicher Kontakt für unsere Kunden"
                 width={1024}
                 height={1280}
                 loading="lazy"
