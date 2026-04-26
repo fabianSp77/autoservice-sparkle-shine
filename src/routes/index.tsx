@@ -14,7 +14,7 @@ import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/team-gruppe-43.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
 import detailImg from "@/assets/real/foto-04.jpg";
-import gallery1 from "@/assets/real/foto-03.jpg";
+import gallery1 from "@/assets/real/team-gruppe-43.jpg";
 import gallery2 from "@/assets/real/foto-06.jpg";
 import gallery3 from "@/assets/real/foto-07.jpg";
 import gallery4 from "@/assets/real/foto-08.jpg";
