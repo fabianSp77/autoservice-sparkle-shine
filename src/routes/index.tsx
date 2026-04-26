@@ -14,7 +14,7 @@ import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/team-gruppe-43.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
 import detailImg from "@/assets/real/foto-04.jpg";
-import gallery1 from "@/assets/real/foto-03.jpg";
+import gallery1 from "@/assets/real/team-gruppe-43.jpg";
 import gallery2 from "@/assets/real/foto-06.jpg";
 import gallery3 from "@/assets/real/foto-07.jpg";
 import gallery4 from "@/assets/real/foto-08.jpg";
@@ -533,7 +533,7 @@ function HomePage() {
 
           {/* Bento: 1 großes Bild + 3 kleinere */}
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-3 md:gap-4 md:h-[520px]">
-            <BentoImg src={gallery1} alt="Eindruck aus dem Autoservice Beuerberg 1" className="md:col-span-2 md:row-span-2" />
+            <BentoImg src={gallery1} alt="Das Team von Autoservice Beuerberg vor der Werkstatt" className="md:col-span-2 md:row-span-2" />
             <BentoImg src={gallery2} alt="Eindruck aus dem Autoservice Beuerberg 2" />
             <BentoImg src={gallery3} alt="Eindruck aus dem Autoservice Beuerberg 3" />
             <BentoImg src={gallery4} alt="Eindruck aus dem Autoservice Beuerberg 4" className="md:col-span-2" />
