@@ -22,7 +22,7 @@ export const Route = createFileRoute("/ueber-uns")({
         content:
           "Familienbetrieb seit 2009 — geführt von Jürgen, Monika und Ludwig Fischer.",
       },
-      { property: "og:image", content: teamImg },
+      { property: "og:image", content: heroImg },
     ],
   }),
   component: AboutPage,
