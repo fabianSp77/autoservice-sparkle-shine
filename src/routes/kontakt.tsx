@@ -464,9 +464,9 @@ function ContactPage() {
           <aside className="space-y-4">
             <ContactCard icon={PhoneCall} title="Telefonisch erreichbar" body={
               <p className="text-xs text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Mo–Do 07:30–18 · Fr bis 12 Uhr</span>{" "}
-                persönlich · außerhalb übernimmt unser Telefonassistent
-                rund um die Uhr.
+                <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="text-primary hover:underline font-medium">{SITE.phone}</a>{" "}
+                — innerhalb der Öffnungszeiten persönlich, außerhalb übernimmt
+                unser Telefonassistent rund um die Uhr.
               </p>
             } />
             <ContactCard icon={Mail} title="E-Mail" body={
