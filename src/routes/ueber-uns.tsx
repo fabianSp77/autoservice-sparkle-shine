@@ -60,7 +60,7 @@ function AboutPage() {
         subtitle="2009 gründeten Jürgen und Monika Fischer ihren Autoservice in der Bahnhofstraße. Heute führen sie den Betrieb gemeinsam mit ihrem Sohn Ludwig — und einem eingespielten Team aus erfahrenen Mechanikern."
         breadcrumbs={[{ label: "Über uns" }]}
         image={heroImg}
-        imageAlt="Werkstatt Autoservice Beuerberg in der Bahnhofstraße"
+        imageAlt="Das Team von Autoservice Beuerberg vor der Werkstatt"
       />
 
       <section className="py-16 md:py-20">
@@ -68,8 +68,8 @@ function AboutPage() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elegant">
               <img
-                src={familieImg}
-                alt="Monika Fischer im Büro — persönlicher Kontakt für unsere Kunden"
+                src={handshakeImg}
+                alt="Ludwig Fischer mit Auszubildendem vor der Werkstatt — Wissen wird weitergegeben"
                 width={1024}
                 height={1280}
                 loading="lazy"
