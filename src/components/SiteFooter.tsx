@@ -76,18 +76,20 @@ export function SiteFooter() {
           <h4 className="text-xs uppercase tracking-[0.18em] text-background/60 font-sans">
             Öffnungszeiten
           </h4>
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-4 space-y-3 text-sm">
             {SITE.hoursShort.map((h) => (
-              <li key={h.day} className="flex items-center justify-between gap-3 max-w-[14rem]">
-                <span className="flex items-center gap-2">
+              <li key={h.day} className="flex items-start justify-between gap-4">
+                <span className="flex items-center gap-2 shrink-0">
                   <Clock className="h-3.5 w-3.5 text-gold/70" />
                   {h.day}
                 </span>
-                <span className="text-background/70">{h.time}</span>
+                <span className="text-background/70 text-right whitespace-pre-line leading-snug">
+                  {h.time.replace(/\s·\s/g, "\n")}
+                </span>
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs text-background/50 max-w-[14rem]">
+          <p className="mt-4 text-xs text-background/50">
             Termine außerhalb der Öffnungszeiten nach Absprache möglich.
           </p>
         </div>
