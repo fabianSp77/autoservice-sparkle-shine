@@ -476,11 +476,11 @@ function ContactPage() {
               <span>{SITE.street}<br />{SITE.zip} {SITE.city}</span>
             } />
             <ContactCard icon={Clock} title="Öffnungszeiten" body={
-              <ul className="space-y-1.5">
-                {SITE.hours.map((h) => (
+              <ul className="space-y-2">
+                {SITE.hoursShort.map((h) => (
                   <li key={h.day} className="flex items-start justify-between gap-3">
                     <span className="shrink-0">{h.day}</span>
-                    <span className="text-muted-foreground text-right whitespace-pre-line leading-snug">
+                    <span className="text-muted-foreground tabular-nums text-right whitespace-pre-line leading-snug">
                       {h.time.replace(/\s·\s/g, "\n")}
                     </span>
                   </li>
