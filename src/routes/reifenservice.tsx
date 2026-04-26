@@ -117,7 +117,7 @@ function ReifenPage() {
         <div className="container-tight grid grid-cols-2 md:grid-cols-4 divide-x divide-border">
           {[
             { v: "15+", l: "Jahre Reifenerfahrung" },
-            { v: "Mo–Fr", l: "8–17 Uhr persönlich" },
+            { v: "Mo–Do", l: "7:30–18 Uhr · Fr bis 12" },
             { v: "24/7", l: "Telefonassistent" },
             { v: "Trocken", l: "& überwachte Lagerung" },
           ].map((s) => (
