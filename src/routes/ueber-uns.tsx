@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Award, HeartHandshake, Sparkles, Users } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SITE } from "@/lib/site";
-import teamImg from "@/assets/real/foto-02.jpg";
-import landschaftImg from "@/assets/real/foto-08.jpg";
-import serviceImg from "@/assets/real/foto-04.jpg";
+import heroImg from "@/assets/real/header-gebaeude.jpg";
+import familieImg from "@/assets/real/foto-01.jpg";
+import technikImg from "@/assets/real/foto-02.jpg";
+import lackImg from "@/assets/real/foto-08.jpg";
 
 export const Route = createFileRoute("/ueber-uns")({
   head: () => ({
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/ueber-uns")({
         content:
           "Familienbetrieb seit 2009 — geführt von Jürgen, Monika und Ludwig Fischer.",
       },
-      { property: "og:image", content: teamImg },
+      { property: "og:image", content: heroImg },
     ],
   }),
   component: AboutPage,
@@ -58,8 +59,8 @@ function AboutPage() {
         title="Eine Werkstatt mit Handschlag-Qualität."
         subtitle="2009 gründeten Jürgen und Monika Fischer ihren Autoservice in der Bahnhofstraße. Heute führen sie den Betrieb gemeinsam mit ihrem Sohn Ludwig — und einem eingespielten Team aus erfahrenen Mechanikern."
         breadcrumbs={[{ label: "Über uns" }]}
-        image={teamImg}
-        imageAlt="Team und Familie Fischer — Autoservice Beuerberg"
+        image={heroImg}
+        imageAlt="Werkstatt Autoservice Beuerberg in der Bahnhofstraße"
       />
 
       <section className="py-16 md:py-20">
@@ -67,8 +68,8 @@ function AboutPage() {
           <div className="relative">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elegant">
               <img
-                src={teamImg}
-                alt="Familie Fischer mit ihrem Team"
+                src={familieImg}
+                alt="Monika Fischer im Büro — persönlicher Kontakt für unsere Kunden"
                 width={1024}
                 height={1280}
                 loading="lazy"
@@ -142,8 +143,8 @@ function AboutPage() {
         <div className="container-tight grid md:grid-cols-2 gap-6">
           <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-warm">
             <img
-              src={serviceImg}
-              alt="Detail aus unserer Werkstatt"
+              src={technikImg}
+              alt="Bosch-Achsmessung in unserer Werkstatt"
               width={1280}
               height={960}
               loading="lazy"
@@ -152,8 +153,8 @@ function AboutPage() {
           </div>
           <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-warm">
             <img
-              src={landschaftImg}
-              alt="Beuerberg im Voralpenland"
+              src={lackImg}
+              alt="Lackierarbeiten in unserer Lackierkabine"
               width={1920}
               height={800}
               loading="lazy"
