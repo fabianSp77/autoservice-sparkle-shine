@@ -559,11 +559,13 @@ function HomePage() {
                   </span>
                   <div className="flex-1">
                     <p className="font-medium">Öffnungszeiten</p>
-                    <ul className="mt-2 text-sm space-y-0.5">
+                    <ul className="mt-2 text-sm space-y-1.5">
                       {SITE.hours.map((h) => (
-                        <li key={h.day} className="flex justify-between gap-3">
-                          <span className="text-foreground/80">{h.day}</span>
-                          <span className="text-muted-foreground tabular-nums">{h.time}</span>
+                        <li key={h.day} className="flex items-start justify-between gap-3">
+                          <span className="text-foreground/80 shrink-0">{h.day}</span>
+                          <span className="text-muted-foreground tabular-nums text-right whitespace-pre-line leading-snug">
+                            {h.time.replace(/\s·\s/g, "\n")}
+                          </span>
                         </li>
                       ))}
                     </ul>
