@@ -193,7 +193,7 @@ function ContactPage() {
               <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
                 <li className="flex items-center gap-2 text-foreground/80">
                   <Users className="h-4 w-4 text-primary shrink-0" />
-                  Mo–Fr 8–17 Uhr persönlich
+                  Mo–Do 7:30–18 · Fr bis 12 Uhr
                 </li>
                 <li className="flex items-center gap-2 text-foreground/80">
                   <Headphones className="h-4 w-4 text-primary shrink-0" />
