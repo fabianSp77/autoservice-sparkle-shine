@@ -8,18 +8,19 @@ export const SITE = {
   phoneIntl: "+498179929244",
   email: "info@autoservice-beuerberg.de",
   founded: 2009,
-  // Verifizierte Öffnungszeiten (Quelle: Gelbe Seiten / Das Örtliche)
+  // Aktuelle Öffnungszeiten (vom Inhaber bestätigt)
   hours: [
-    { day: "Montag", time: "08:00 – 17:00" },
-    { day: "Dienstag", time: "08:00 – 17:00" },
-    { day: "Mittwoch", time: "08:00 – 17:00" },
-    { day: "Donnerstag", time: "08:00 – 17:00" },
-    { day: "Freitag", time: "08:00 – 17:00" },
+    { day: "Montag", time: "07:30 – 12:00 · 13:00 – 18:00" },
+    { day: "Dienstag", time: "07:30 – 12:00 · 13:00 – 18:00" },
+    { day: "Mittwoch", time: "07:30 – 12:00 · 13:00 – 18:00" },
+    { day: "Donnerstag", time: "07:30 – 12:00 · 13:00 – 18:00" },
+    { day: "Freitag", time: "07:30 – 12:00" },
     { day: "Samstag", time: "Geschlossen" },
     { day: "Sonntag", time: "Geschlossen" },
   ],
   hoursShort: [
-    { day: "Mo – Fr", time: "08:00 – 17:00" },
+    { day: "Mo – Do", time: "07:30 – 12:00 · 13:00 – 18:00" },
+    { day: "Freitag", time: "07:30 – 12:00" },
     { day: "Sa & So", time: "Geschlossen" },
   ],
   owners: ["Jürgen Fischer", "Monika Fischer", "Ludwig Fischer"],
