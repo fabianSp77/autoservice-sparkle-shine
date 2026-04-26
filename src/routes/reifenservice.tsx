@@ -332,8 +332,8 @@ function ReifenPage() {
                 Jetzt Reifenwechsel oder Einlagerung anfragen.
               </h2>
               <p className="mt-4 text-primary-foreground/85 text-base md:text-lg">
-                Am schnellsten geht's per Telefon — Mo–Fr 8–17 Uhr persönlich,
-                außerhalb 24/7 über unseren Telefonassistenten.
+                Am schnellsten geht's per Telefon — Mo–Do 7:30–12 & 13–18 Uhr,
+                Fr 7:30–12 Uhr persönlich, außerhalb 24/7 über unseren Telefonassistenten.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
                 <a
