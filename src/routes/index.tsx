@@ -86,7 +86,7 @@ const ABLAUF = [
     icon: Phone,
     step: "01",
     t: "Anruf oder Anfrage",
-    d: "Mo–Fr persönlich, sonst über unseren 24/7 Telefonassistenten.",
+    d: "Mo–Do 07:30–18, Fr bis 12 Uhr persönlich — sonst über unseren 24/7 Telefonassistenten.",
   },
   {
     icon: CalendarClock,
@@ -560,7 +560,7 @@ function HomePage() {
                   <div className="flex-1">
                     <p className="font-medium">Öffnungszeiten</p>
                     <ul className="mt-2 text-sm space-y-1.5">
-                      {SITE.hours.map((h) => (
+                      {SITE.hoursShort.map((h) => (
                         <li key={h.day} className="flex items-start justify-between gap-3">
                           <span className="text-foreground/80 shrink-0">{h.day}</span>
                           <span className="text-muted-foreground tabular-nums text-right whitespace-pre-line leading-snug">
@@ -611,7 +611,7 @@ function HomePage() {
             Bereit für Ihren Termin? Ein Anruf genügt.
           </h2>
           <p className="mt-5 text-primary-foreground/85 max-w-xl mx-auto leading-relaxed">
-            Persönlich Mo–Do 7:30–12 & 13–18 Uhr, Fr 7:30–12 Uhr — außerhalb nimmt unser Telefonassistent
+            Persönlich Mo–Do 07:30–12 und 13–18 Uhr, Fr 07:30–12 Uhr — außerhalb nimmt unser Telefonassistent
             <strong className="text-primary-foreground"> rund um die Uhr</strong> Ihre Terminwünsche entgegen.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
