@@ -90,7 +90,7 @@ export const Route = createFileRoute("/kontakt")({
       {
         name: "description",
         content:
-          "Telefonisch rund um die Uhr erreichbar: 08179 929244. Persönlich Mo–Fr 8–17 Uhr, außerhalb über unseren Telefonassistenten. Oder schreiben Sie uns eine Nachricht.",
+          "Telefonisch rund um die Uhr erreichbar: 08179 929244. Persönlich Mo–Do 7:30–12 & 13–18 Uhr, Fr 7:30–12 Uhr, außerhalb über unseren Telefonassistenten. Oder schreiben Sie uns eine Nachricht.",
       },
       { property: "og:title", content: "Kontakt — Autoservice Beuerberg" },
       {
