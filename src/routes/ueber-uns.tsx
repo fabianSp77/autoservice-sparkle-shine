@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Award, HeartHandshake, Sparkles, Users } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { SITE } from "@/lib/site";
-import heroImg from "@/assets/real/team-gruppe.jpg";
+import heroImg from "@/assets/real/team-gruppe-43.jpg";
 import handshakeImg from "@/assets/real/team-handshake.jpg";
 import technikImg from "@/assets/real/foto-02.jpg";
 import lackImg from "@/assets/real/foto-08.jpg";

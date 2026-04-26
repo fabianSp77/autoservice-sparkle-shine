@@ -11,7 +11,7 @@ import { MapEmbed } from "@/components/MapEmbed";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { GOOGLE_REVIEWS, REVIEWS_SUMMARY } from "@/lib/reviews";
 import heroImg from "@/assets/real/header-gebaeude.jpg";
-import teamImg from "@/assets/real/team-gruppe.jpg";
+import teamImg from "@/assets/real/team-gruppe-43.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
 import detailImg from "@/assets/real/foto-04.jpg";
 import gallery1 from "@/assets/real/foto-03.jpg";
@@ -305,14 +305,14 @@ function HomePage() {
         <div className="container-tight">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-elegant">
+              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-elegant bg-muted">
                 <img
                   src={teamImg}
                   alt="Das Team von Autoservice Beuerberg vor der Werkstatt"
                   width={1440}
                   height={1080}
                   loading="lazy"
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-center"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 sm:bottom-8 sm:right-8 bg-card rounded-2xl shadow-warm border border-border p-5 max-w-[14rem]">
