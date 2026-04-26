@@ -153,8 +153,8 @@ function AboutPage() {
           </div>
           <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-warm">
             <img
-              src={landschaftImg}
-              alt="Beuerberg im Voralpenland"
+              src={lackImg}
+              alt="Lackierarbeiten in unserer Lackierkabine"
               width={1920}
               height={800}
               loading="lazy"
