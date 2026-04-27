@@ -92,5 +92,5 @@ export const GOOGLE_REVIEWS: StaticReview[] = [
 // Quelle: Google Search/Maps öffentliches Profil
 export const REVIEWS_SUMMARY = {
   rating: 4.7,
-  count: 56,
+  count: 63,
 };
