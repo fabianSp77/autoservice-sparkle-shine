@@ -190,11 +190,7 @@ function ContactPage() {
                 nimmt unser <strong className="text-foreground">Telefonassistent rund um die Uhr</strong> Ihre
                 Terminwünsche und Anliegen entgegen.
               </p>
-              <ul className="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
-                <li className="flex items-center gap-2 text-foreground/80">
-                  <Users className="h-4 w-4 text-primary shrink-0" />
-                  Mo–Do 07:30–18 · Fr bis 12 Uhr
-                </li>
+              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
                 <li className="flex items-center gap-2 text-foreground/80">
                   <Headphones className="h-4 w-4 text-primary shrink-0" />
                   24/7 Telefonassistent
