@@ -13,7 +13,7 @@ export const Route = createFileRoute("/bewertungen")({
       {
         name: "description",
         content:
-          "5,0 Sterne auf Google: Lesen Sie echte Erfahrungsberichte von Kundinnen und Kunden des Autoservice Beuerberg in Eurasburg.",
+          "4,7 Sterne auf Google: Lesen Sie echte Erfahrungsberichte von Kundinnen und Kunden des Autoservice Beuerberg in Eurasburg.",
       },
       { property: "og:title", content: "Google-Bewertungen — Autoservice Beuerberg" },
       {
