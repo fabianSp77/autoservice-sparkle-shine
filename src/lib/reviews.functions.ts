@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { REVIEWS_SUMMARY } from "./reviews";
 
-const PLACE_ID = "ChIJZahmrqe4nUcR54emC0uv9SQ";
+const PLACE_ID = "ChIJZagmrqe4nUcR55imC0uv9SQ";
 const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 Stunden
 
 type Summary = { rating: number; count: number; source: "google" | "fallback" };
