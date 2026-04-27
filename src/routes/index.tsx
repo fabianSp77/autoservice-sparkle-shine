@@ -567,7 +567,18 @@ function HomePage() {
                 subtitle="Gut erreichbar aus Wolfratshausen, Bad Tölz, Tegernsee und dem gesamten Landkreis. Parkplätze direkt vor der Tür."
               />
               <div className="mt-8 space-y-3">
-                <InfoRow icon={MapPin} title="Adresse" body={`${SITE.street}, ${SITE.zip} ${SITE.city}`} />
+                <InfoRow
+                  icon={Phone}
+                  title="Direkt anrufen"
+                  body={
+                    <a
+                      href={`tel:${SITE.phoneIntl}`}
+                      className="text-primary hover:underline font-medium"
+                    >
+                      {SITE.phone}
+                    </a>
+                  }
+                />
                 <div className="flex items-start gap-4 p-5 rounded-2xl bg-card border border-border">
                   <span className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-primary/10 text-primary shrink-0">
                     <Clock className="h-5 w-5" />
@@ -586,18 +597,7 @@ function HomePage() {
                     </ul>
                   </div>
                 </div>
-                <InfoRow
-                  icon={Phone}
-                  title="Direkt anrufen"
-                  body={
-                    <a
-                      href={`tel:${SITE.phoneIntl}`}
-                      className="text-primary hover:underline font-medium"
-                    >
-                      {SITE.phone}
-                    </a>
-                  }
-                />
+                <InfoRow icon={MapPin} title="Adresse" body={`${SITE.street}, ${SITE.zip} ${SITE.city}`} />
               </div>
             </div>
             <MapEmbed className="aspect-[4/3] lg:aspect-square shadow-elegant" />
