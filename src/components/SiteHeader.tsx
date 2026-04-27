@@ -51,9 +51,6 @@ export function SiteHeader() {
             <span className="font-serif text-lg font-semibold tracking-tight">
               Autoservice Beuerberg
             </span>
-            <span className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">
-              Familienbetrieb seit {SITE.founded}
-            </span>
           </span>
         </Link>
 
