@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/PageHero";
 import { MapEmbed } from "@/components/MapEmbed";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { GOOGLE_REVIEWS, REVIEWS_SUMMARY } from "@/lib/reviews";
+import { getGoogleReviewsSummary } from "@/lib/reviews.functions";
 import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/team-gruppe-43.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
@@ -20,13 +21,26 @@ import gallery3 from "@/assets/real/foto-07.jpg";
 import gallery4 from "@/assets/real/foto-08.jpg";
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    try {
+      return { summary: await getGoogleReviewsSummary() };
+    } catch {
+      return {
+        summary: {
+          rating: REVIEWS_SUMMARY.rating,
+          count: REVIEWS_SUMMARY.count,
+          source: "fallback" as const,
+        },
+      };
+    }
+  },
   head: () => ({
     meta: [
       { title: "Autoservice Beuerberg GmbH — Ihre Werkstatt im Voralpenland" },
       {
         name: "description",
         content:
-          "Familiengeführte Kfz-Werkstatt in Eurasburg-Beuerberg seit 2009. Inspektion, HU/AU, Reparaturen aller Marken, Reifenservice & Klimaservice — 4,6★ auf Google.",
+          "Familiengeführte Kfz-Werkstatt in Eurasburg-Beuerberg seit 2009. Inspektion, HU/AU, Reparaturen aller Marken, Reifenservice & Klimaservice.",
       },
       { property: "og:title", content: "Autoservice Beuerberg GmbH — Ihre Werkstatt im Voralpenland" },
       {
@@ -120,6 +134,7 @@ const HOME_REVIEWS = GOOGLE_REVIEWS.filter((r) =>
 ).slice(0, 3);
 
 function HomePage() {
+  const { summary } = Route.useLoaderData();
   return (
     <div>
       {/* HERO */}
@@ -195,7 +210,7 @@ function HomePage() {
             className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 fade-in-up md:hidden"
             style={{ animationDelay: "260ms" }}
           >
-            <GoogleRatingBadge variant="dark" />
+            <GoogleRatingBadge variant="dark" rating={summary.rating} count={summary.count} />
             <p className="text-xs text-background/75">
               <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 mr-2 align-middle animate-pulse" />
               <strong className="text-background">24/7 erreichbar</strong>
@@ -208,7 +223,7 @@ function HomePage() {
           <div className="container-tight">
             <div className="bg-background/95 backdrop-blur border-t border-x border-border rounded-t-2xl shadow-elegant grid grid-cols-4 divide-x divide-border">
               {[
-                { v: REVIEWS_SUMMARY.rating.toFixed(1) + "★", l: "Google-Bewertung" },
+                { v: summary.rating.toFixed(1) + "★", l: "Google-Bewertung" },
                 { v: "15+", l: "Jahre Erfahrung" },
                 { v: "Alle", l: "Marken & Modelle" },
                 { v: "24/7", l: "Erreichbarkeit" },
@@ -471,7 +486,7 @@ function HomePage() {
               Vertrauen, das man hört.
             </h2>
             <div className="mt-6 flex justify-center">
-              <GoogleRatingBadge variant="dark" />
+              <GoogleRatingBadge variant="dark" rating={summary.rating} count={summary.count} />
             </div>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-5">
@@ -509,7 +524,7 @@ function HomePage() {
               to="/bewertungen"
               className="inline-flex items-center gap-2 text-sm font-semibold text-gold hover:gap-3 transition-all"
             >
-              Alle {REVIEWS_SUMMARY.count} Bewertungen auf Google ansehen <ArrowRight className="h-4 w-4" />
+              Alle {summary.count} Bewertungen auf Google ansehen <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

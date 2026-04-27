@@ -7,25 +7,33 @@ type Variant = "compact" | "default" | "dark";
 type Props = {
   variant?: Variant;
   className?: string;
+  rating?: number;
+  count?: number;
 };
 
 /**
- * Wiederverwendbares Google-Rating-Badge — zeigt den echten 5,0★-Schnitt
- * und verlinkt auf die Bewertungsseite.
+ * Wiederverwendbares Google-Rating-Badge — zeigt den echten Google-Schnitt
+ * und verlinkt auf die Bewertungsseite. Werte können per Props überschrieben
+ * werden (z.B. mit Live-Daten aus Loader); ansonsten Fallback aus REVIEWS_SUMMARY.
  */
-export function GoogleRatingBadge({ variant = "default", className = "" }: Props) {
-  const filled = Math.round(REVIEWS_SUMMARY.rating);
+export function GoogleRatingBadge({
+  variant = "default",
+  className = "",
+  rating = REVIEWS_SUMMARY.rating,
+  count = REVIEWS_SUMMARY.count,
+}: Props) {
+  const filled = Math.round(rating);
 
   if (variant === "compact") {
     return (
       <Link
         to="/bewertungen"
         className={`inline-flex items-center gap-1.5 rounded-full border border-border bg-card hover:border-primary/40 hover:shadow-warm px-2.5 py-1 transition-all ${className}`}
-        aria-label={`${REVIEWS_SUMMARY.rating.toFixed(1)} von 5 Sternen auf Google`}
+        aria-label={`${rating.toFixed(1)} von 5 Sternen auf Google`}
       >
         <GoogleG className="h-3.5 w-3.5" />
         <span className="text-xs font-semibold text-foreground tabular-nums">
-          {REVIEWS_SUMMARY.rating.toFixed(1)}
+          {rating.toFixed(1)}
         </span>
         <span className="flex gap-0.5 text-gold">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -44,11 +52,11 @@ export function GoogleRatingBadge({ variant = "default", className = "" }: Props
       <Link
         to="/bewertungen"
         className={`inline-flex items-center gap-3 rounded-full bg-background/10 backdrop-blur border border-background/20 hover:bg-background/15 px-4 py-2 transition-all group ${className}`}
-        aria-label={`${REVIEWS_SUMMARY.rating.toFixed(1)} von 5 Sternen auf Google`}
+        aria-label={`${rating.toFixed(1)} von 5 Sternen auf Google`}
       >
         <GoogleG className="h-4 w-4" />
         <span className="text-sm font-semibold text-background tabular-nums">
-          {REVIEWS_SUMMARY.rating.toFixed(1)}
+          {rating.toFixed(1)}
         </span>
         <span className="flex gap-0.5 text-gold">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -69,11 +77,11 @@ export function GoogleRatingBadge({ variant = "default", className = "" }: Props
     <Link
       to="/bewertungen"
       className={`inline-flex items-center gap-3 rounded-full bg-card border border-border hover:border-primary/40 hover:shadow-warm px-4 py-2 transition-all ${className}`}
-      aria-label={`${REVIEWS_SUMMARY.rating.toFixed(1)} von 5 Sternen auf Google – ${REVIEWS_SUMMARY.count} Bewertungen`}
+      aria-label={`${rating.toFixed(1)} von 5 Sternen auf Google – ${count} Bewertungen`}
     >
       <GoogleG className="h-4 w-4" />
       <span className="text-sm font-semibold text-foreground tabular-nums">
-        {REVIEWS_SUMMARY.rating.toFixed(1)}
+        {rating.toFixed(1)}
       </span>
       <span className="flex gap-0.5 text-gold">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -84,7 +92,7 @@ export function GoogleRatingBadge({ variant = "default", className = "" }: Props
         ))}
       </span>
       <span className="text-xs text-muted-foreground hidden sm:inline">
-        {REVIEWS_SUMMARY.count} Bewertungen
+        {count} Bewertungen
       </span>
     </Link>
   );
