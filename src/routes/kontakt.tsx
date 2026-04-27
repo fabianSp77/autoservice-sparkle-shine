@@ -167,7 +167,6 @@ function ContactPage() {
       <PageHero
         eyebrow="Kontakt"
         title="Am schnellsten erreichen Sie uns telefonisch."
-        subtitle="Persönlich Mo–Do 07:30–12 und 13–18 Uhr, Fr 07:30–12 Uhr — außerhalb der Öffnungszeiten nimmt unser Telefonassistent rund um die Uhr Ihre Anliegen entgegen."
         breadcrumbs={[{ label: "Kontakt" }]}
         showTrustStrip={false}
       />
