@@ -464,12 +464,6 @@ function ContactPage() {
                 unser Telefonassistent rund um die Uhr.
               </p>
             } />
-            <ContactCard icon={Mail} title="E-Mail" body={
-              <a href={`mailto:${SITE.email}`} className="text-primary hover:underline break-all">{SITE.email}</a>
-            } />
-            <ContactCard icon={MapPin} title="Adresse" body={
-              <span>{SITE.street}<br />{SITE.zip} {SITE.city}</span>
-            } />
             <ContactCard icon={Clock} title="Öffnungszeiten" body={
               <ul className="space-y-2">
                 {SITE.hoursShort.map((h) => (
@@ -481,6 +475,12 @@ function ContactPage() {
                   </li>
                 ))}
               </ul>
+            } />
+            <ContactCard icon={Mail} title="E-Mail" body={
+              <a href={`mailto:${SITE.email}`} className="text-primary hover:underline break-all">{SITE.email}</a>
+            } />
+            <ContactCard icon={MapPin} title="Adresse" body={
+              <span>{SITE.street}<br />{SITE.zip} {SITE.city}</span>
             } />
             <MapEmbed className="aspect-[4/3]" />
           </aside>
