@@ -91,6 +91,6 @@ export const GOOGLE_REVIEWS: StaticReview[] = [
 // Aggregat — verifiziert direkt vom Google-Profil (Stand: 2026-04)
 // Quelle: Google Search/Maps öffentliches Profil
 export const REVIEWS_SUMMARY = {
-  rating: 4.6,
+  rating: 4.7,
   count: 56,
 };
