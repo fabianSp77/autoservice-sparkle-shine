@@ -40,6 +40,7 @@ export const Route = createFileRoute("/bewertungen")({
 });
 
 function ReviewsPage() {
+  const { summary } = Route.useLoaderData();
   return (
     <>
       <PageHero
@@ -49,7 +50,7 @@ function ReviewsPage() {
         breadcrumbs={[{ label: "Bewertungen" }]}
         showTrustStrip={false}
       >
-        <RatingHeader />
+        <RatingHeader rating={summary.rating} count={summary.count} />
       </PageHero>
 
       <GoogleReviewsSection />
@@ -61,16 +62,16 @@ function ReviewsPage() {
 
 /* ---------------- Rating Header (im Hero) ---------------- */
 
-function RatingHeader() {
-  const filled = Math.round(REVIEWS_SUMMARY.rating);
+function RatingHeader({ rating, count }: { rating: number; count: number }) {
+  const filled = Math.round(rating);
   return (
     <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
       <div className="flex items-center gap-3">
         <span className="font-serif text-4xl md:text-5xl text-foreground leading-none">
-          {REVIEWS_SUMMARY.rating.toFixed(1)}
+          {rating.toFixed(1)}
         </span>
         <div className="flex flex-col gap-1">
-          <div className="flex gap-0.5 text-gold" aria-label={`${REVIEWS_SUMMARY.rating} von 5 Sternen`}>
+          <div className="flex gap-0.5 text-gold" aria-label={`${rating} von 5 Sternen`}>
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
                 key={i}
@@ -79,7 +80,7 @@ function RatingHeader() {
             ))}
           </div>
           <p className="text-xs text-muted-foreground">
-            aus {REVIEWS_SUMMARY.count} Google-Bewertungen
+            aus {count} Google-Bewertungen
           </p>
         </div>
       </div>
