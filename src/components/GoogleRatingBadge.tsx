@@ -19,8 +19,8 @@ type Props = {
 export function GoogleRatingBadge({
   variant = "default",
   className = "",
-  rating = rating,
-  count = count,
+  rating = REVIEWS_SUMMARY.rating,
+  count = REVIEWS_SUMMARY.count,
 }: Props) {
   const filled = Math.round(rating);
 
