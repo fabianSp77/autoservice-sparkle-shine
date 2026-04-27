@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/PageHero";
 import { MapEmbed } from "@/components/MapEmbed";
 import { GoogleRatingBadge } from "@/components/GoogleRatingBadge";
 import { GOOGLE_REVIEWS, REVIEWS_SUMMARY } from "@/lib/reviews";
+import { getGoogleReviewsSummary } from "@/lib/reviews.functions";
 import heroImg from "@/assets/real/header-gebaeude.jpg";
 import teamImg from "@/assets/real/team-gruppe-43.jpg";
 import reifenImg from "@/assets/real/foto-05.jpg";
@@ -20,13 +21,26 @@ import gallery3 from "@/assets/real/foto-07.jpg";
 import gallery4 from "@/assets/real/foto-08.jpg";
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    try {
+      return { summary: await getGoogleReviewsSummary() };
+    } catch {
+      return {
+        summary: {
+          rating: REVIEWS_SUMMARY.rating,
+          count: REVIEWS_SUMMARY.count,
+          source: "fallback" as const,
+        },
+      };
+    }
+  },
   head: () => ({
     meta: [
       { title: "Autoservice Beuerberg GmbH — Ihre Werkstatt im Voralpenland" },
       {
         name: "description",
         content:
-          "Familiengeführte Kfz-Werkstatt in Eurasburg-Beuerberg seit 2009. Inspektion, HU/AU, Reparaturen aller Marken, Reifenservice & Klimaservice — 4,6★ auf Google.",
+          "Familiengeführte Kfz-Werkstatt in Eurasburg-Beuerberg seit 2009. Inspektion, HU/AU, Reparaturen aller Marken, Reifenservice & Klimaservice.",
       },
       { property: "og:title", content: "Autoservice Beuerberg GmbH — Ihre Werkstatt im Voralpenland" },
       {
