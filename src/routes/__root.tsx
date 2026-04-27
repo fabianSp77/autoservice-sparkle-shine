@@ -38,7 +38,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Autoservice Beuerberg GmbH — Ihre Werkstatt im Voralpenland" },
+      { title: "Autoservice  Ihre Werkstatt" },
       {
         name: "description",
         content:
@@ -50,6 +50,13 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "de_DE" },
       { property: "og:site_name", content: "Autoservice Beuerberg" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Autoservice  Ihre Werkstatt" },
+      { name: "twitter:title", content: "Autoservice  Ihre Werkstatt" },
+      { name: "description", content: "A professional automotive workshop website showcasing services, contact information, and customer reviews." },
+      { property: "og:description", content: "A professional automotive workshop website showcasing services, contact information, and customer reviews." },
+      { name: "twitter:description", content: "A professional automotive workshop website showcasing services, contact information, and customer reviews." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/74d45cb0-0227-4664-9c29-fd0ccba20a50/id-preview-7bda124c--d14ed743-2148-46c9-9118-e5b9ee9beaab.lovable.app-1777301686794.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/74d45cb0-0227-4664-9c29-fd0ccba20a50/id-preview-7bda124c--d14ed743-2148-46c9-9118-e5b9ee9beaab.lovable.app-1777301686794.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
