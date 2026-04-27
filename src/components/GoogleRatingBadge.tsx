@@ -7,14 +7,22 @@ type Variant = "compact" | "default" | "dark";
 type Props = {
   variant?: Variant;
   className?: string;
+  rating?: number;
+  count?: number;
 };
 
 /**
- * Wiederverwendbares Google-Rating-Badge — zeigt den echten 5,0★-Schnitt
- * und verlinkt auf die Bewertungsseite.
+ * Wiederverwendbares Google-Rating-Badge — zeigt den echten Google-Schnitt
+ * und verlinkt auf die Bewertungsseite. Werte können per Props überschrieben
+ * werden (z.B. mit Live-Daten aus Loader); ansonsten Fallback aus REVIEWS_SUMMARY.
  */
-export function GoogleRatingBadge({ variant = "default", className = "" }: Props) {
-  const filled = Math.round(REVIEWS_SUMMARY.rating);
+export function GoogleRatingBadge({
+  variant = "default",
+  className = "",
+  rating = REVIEWS_SUMMARY.rating,
+  count = REVIEWS_SUMMARY.count,
+}: Props) {
+  const filled = Math.round(rating);
 
   if (variant === "compact") {
     return (
