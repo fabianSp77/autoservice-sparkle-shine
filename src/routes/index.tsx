@@ -134,6 +134,7 @@ const HOME_REVIEWS = GOOGLE_REVIEWS.filter((r) =>
 ).slice(0, 3);
 
 function HomePage() {
+  const { summary } = Route.useLoaderData();
   return (
     <div>
       {/* HERO */}
