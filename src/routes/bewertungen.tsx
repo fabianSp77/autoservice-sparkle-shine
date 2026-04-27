@@ -5,8 +5,22 @@ import { PageHero } from "@/components/PageHero";
 import { FacebookFeed } from "@/components/FacebookFeed";
 import { SITE } from "@/lib/site";
 import { GOOGLE_REVIEWS, REVIEWS_SUMMARY, type StaticReview } from "@/lib/reviews";
+import { getGoogleReviewsSummary } from "@/lib/reviews.functions";
 
 export const Route = createFileRoute("/bewertungen")({
+  loader: async () => {
+    try {
+      return { summary: await getGoogleReviewsSummary() };
+    } catch {
+      return {
+        summary: {
+          rating: REVIEWS_SUMMARY.rating,
+          count: REVIEWS_SUMMARY.count,
+          source: "fallback" as const,
+        },
+      };
+    }
+  },
   head: () => ({
     meta: [
       { title: "Google-Bewertungen — Autoservice Beuerberg" },
